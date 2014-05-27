@@ -1,0 +1,4 @@
+$('#friendModal').modal('show');
+$('#modalFriendDiv').html("<%= escape_javascript(render 'friended') %>");
+$('#modalRequestDiv').html("<%= escape_javascript(render 'requests') %>");
+$('#FriendModalLabel').html("<strong><%= t 'other.friends' %></strong> (<%= @count %>)");

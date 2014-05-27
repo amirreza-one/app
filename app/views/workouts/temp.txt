@@ -1,0 +1,166 @@
+
+<div class="row">
+  <div class="col-md-2 col-sm-2">
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#">Home</a></li>
+      <li class="active"><a href="#">Workout</a></li>
+      <li><a href="#">Challenges</a></li>
+      <li><a href="#">Chart</a></li>
+      <li><a href="#">Nutrition(PRO)</a></li>
+    </ul>
+  </div>
+  <div class="col-md-6 col-sm-7">
+    <div class="row">
+      <div id="video-container">
+        <!--Video of Exercise will be placed here!-->
+
+        <!-- Video Controls -->
+                <span id="video-controls" >
+                    <button type="button" id="play-pause"> <span class="glyphicon glyphicon-play"></span> </button>
+                    <input type="range" id="seek-bar" value="0">
+                    <button type="button" id="full-screen"> <span class="glyphicon glyphicon-fullscreen"></span> </button>
+                    <input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1">
+                    <button type="button" id="mute"> <span class="glyphicon glyphicon-volume-up"></span> </button>
+                </span>
+      </div>
+    </div>
+    <div class="row" id="slideshow">
+      <!--<div class="row-fluid">-->
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+          <div class="item active">
+            <ul class="thumbnails">
+              <li class="span3">
+                <div class="thumbnail">
+                  <a href="#"><%= image_tag('gym1.jpg', :alt => "weight", :class => "img-responsive")%> </a>
+                </div>
+                <span>First Exercise</span>
+              </li>
+              <li class="span3">
+                <div class="thumbnail">
+                  <a href="#"><%= image_tag('BingWallpaper-2014-02-04.jpg', :alt => "Scene")%>
+                  </a>
+                </div>
+                <span>Second Exercise</span>
+              </li>
+              <li class="span3">
+                <div class="thumbnail">
+                  <a href="#"><%= image_tag('AbrahamLake_ROW12028444191_1366x768.jpg', :alt => "Scene")%>
+                  </a>
+                </div>
+                <span>Extra Exercise</span>
+              </li>
+            </ul>
+          </div>
+          <div class="item">
+            <ul class="thumbnails">
+              <li class="span3">
+                <div class="thumbnail">
+                  <a href="#"><%= image_tag('outdoor-running-vs-treadmill-2560x1600.jpg', :alt => "Runner") %></a>
+                </div>
+                <span>Third Exercise</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <a data-slide="prev" href="#carousel-example-generic" class="left carousel-control">‹</a>
+        <a data-slide="next" href="#carousel-example-generic" class="right carousel-control">›</a>
+      </div>
+      <!--</div>-->
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-3">
+    <div class="row">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#english" data-toggle="tab">English Description</a></li>
+        <li><a href="#persian" data-toggle="tab">Persian Description</a></li>
+      </ul>
+      <div class="tab-content">
+        <!--English Description-->
+        <div class="tab-pane fade active in" id="english">
+          <p>In this exersice, first you need to lie down and strech your legs.Then try to touch your toes wuth your hands without bending your knees.Do this movement 5 times.</p>
+        </div>
+        <!--Persian Description-->
+        <div class="tab-pane fade" id="persian">
+          <p>دراین تمرین ابتدا باید روی زمین دراز کشیده و پاهای خود را بکشید.سپس تلاش کنید با دستان خود، انگشت شصت پایتان را لمس کنید. این کار را برای 5 بار تکرار کنید.</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <script>
+        $(function($) {
+            var $mission_timer = $("#mission_timer");
+            var $title = $("#title");
+            $mission_timer.mission_timer();
+            $(".demo").on("click", function() {
+                if (!$mission_timer.data('started')) {
+                    $mission_timer.trigger('configure', {
+                                timerDuration: 90,
+                                max: 90
+                    }).trigger('start');
+                    $title.html('');
+                }
+            });
+        });
+    </script>
+      <div class="counter">
+
+        <div style="clear:both"></div>
+        <div class="demo" style="color:#020202;height:420px;width:100%">
+          <div style="position:relative;width:350px;margin:auto">
+            <div style="position:absolute;left:50px;top:50px">
+              <input id="mission_timer"
+                     data-min="0"
+                     data-max="90"
+                     data-bgColor="#4cb5c8"
+                     data-fgColor="rgba(0, 0, 0, 1)"
+                     data-readOnly=true
+                     data-displayInput=true
+                     data-width="150"
+                     data-height="150"
+                     data-thickness=".1"
+                     data-timerDuration="90">
+
+
+            </div>
+          </div>
+        </div>
+        <div style="clear:both"></div>
+
+      </div>
+  </div>
+</div>
+<script type="text/javascript">
+    counter(90);
+    $(document).ready(function () {
+        $('.carousel').carousel();
+        $('.nav-tabs a:first').tab('show');
+    });
+</script>
+
+<!--<p id="notice"><%= notice %></p>
+<%#
+<p>
+  <strong>User:</strong>
+  <%= @workout.user
+</p>
+<p>
+  <strong>Workout plan:</strong>
+  <%= @workout.workout_plan
+</p>
+<p>
+  <strong>Date:</strong>
+  <%= @workout.date
+</p>
+<p>
+  <strong>Total min:</strong>
+  <%= @workout.total_min
+</p>
+<p>
+  <strong>Total cal:</strong>
+  <%= @workout.total_cal
+</p>
+%>-->
+<%= link_to 'Edit', edit_workout_path(@workout) %> |
+<%= link_to 'Back', workouts_path %>-->

@@ -1,0 +1,165 @@
+<style>
+    .upload_photo:hover {
+        background-color: transparent;
+        color: #000000;
+    }
+</style>
+
+<% flash.each do |key, value| %>
+          <script type="text/javascript">
+              $(function(){
+                  new PNotify({
+                      title: '<%= t 'other.done' %>',
+                      text: '<%= value %>',
+                      type: 'warning',
+                      styling: 'fontawesome',
+                      hide: true,
+                      delay: 1000
+                  });
+              });
+          </script>
+
+      <% end %>
+
+
+
+
+    <%= image_tag @profile.cover.url(:medium),{alt: "Cover" , width: "100%" , height: "472" , class: "img-responsive" , id: "mainCover"} %>
+
+  <div class="row">
+    <div class="col-md-offset-1 col-md-3 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-3 ">
+      <%= image_tag @profile.avatar.url(:medium) ,{id:"profilePic" , class: "img-circle img-responsive img-thumbnail" , width: "200" , height: "200" , alt: "Profile"}%>
+    </div>
+
+    <div class="col-md-3 col-sm-3  col-xs-12 infoDiv hidden-xs" style="margin-top: -200px; color: rgb(38,38,36); text-shadow: 1px 1px 2px #393165;">
+      <h2 ><strong> <%= "#{@profile.firstname} #{@profile.lastname}" %></strong> </h2>
+      <p><strong><i class="fa fa-<%= @profile.gender==1?'male':'female' %>"></i> - <%= age(@profile.birthdate) %> <%= t 'other.yearsold' %>  - <%= @profile.city.capitalize %>,<%= @profile.country.capitalize %></strong></p>
+      <p><strong><%= @profile.height %> <%= t 'other.cm' %> , <%= @profile.weight %> <%= t 'other.kg' %> </strong></p>
+    </div>
+      <%= render 'information_mobile' %>
+
+  </div>
+  <div class="row hidden-xs" >
+    <table class="table table-bordered" >
+        <thead >
+            <th>
+              <span class="glyphicon glyphicon-fire fa-3x"></span> <strong style="font-size: x-large"><%= number_with_delimiter(@optionsProfile[1]) %><%= t 'other.cal_e' %></strong> <p class="small" style="color: #808080"><%= label_tag t('other.totalcal').html_safe %> </p>
+            </th>
+            <th>
+              <i class="fa fa-clock-o fa-3x"></i> <strong style="font-size: x-large"><%= Time.at(@optionsProfile[0]).utc.strftime("%H:%M:%S") %></strong> <p class="small" style="color: #808080"><%= label_tag t('other.totalTime').html_safe %></p>
+            </th>
+            <th>
+              <i class="fa fa-signal fa-3x"></i> <strong style="font-size: x-large"><%= t 'other.easy' %></strong> <p class="small" style="color: #808080"><%= label_tag t('other.level').html_safe %></p>
+            </th>
+            <th>
+              <i class="fa fa-camera fa-3x"></i> <strong style="font-size: x-large"><%= @photos.count %></strong><p class="small" style="color: #808080"><%= label_tag t('other.photos').html_safe %></p>
+            </th>
+        </thead>
+    </table>
+  </div>
+
+
+
+
+
+
+
+
+      <% unless current_user.profile_id == @profile.id %>
+      <div class="row" id="profileButtons">
+          <div class="btn-group btn-group-lg pull-right">
+            <% unless (@profile.user.request_tos.include? current_user) %>
+
+                <% if (current_user.friends.include? @profile.user) %>
+                    <%=link_to raw("<i class='fa fa-user'></i> #{t 'other.unfriend'}"), @friendship, method: :delete, data: { confirm: 'Are you sure?' },remote: true,  class: 'btn btn-primary'%>
+
+                <% else %>
+                    <% unless (current_user.request_tos.include? @profile.user) %>
+                        <%=link_to raw("<i class='fa fa-user'></i> #{t 'other.friendreq'}"), request_friendships_path(:request_to_id => @profile.user,profile_id: @profile),remote: true , method: :post , class: 'btn btn-primary'%>
+                    <% else %>
+                        <%=link_to raw("<i class='fa fa-user'></i> #{t 'other.cancel'}"), request_friendship_path(:id => @request_friendship.id , :profile_id =>params[:id]), method: :delete,remote: true,  class: 'btn btn-primary'%>
+
+                    <% end %>
+                <% end %>
+            <%else%>
+                 <%= link_to raw("<i class='fa fa-user'></i> #{t 'other.accept'}"), friendships_path(:friend_id => @profile.user,profile_id: @profile,request_id: RequestFriendship.find(:first , :conditions => {:user_id => @profile.user.id , :request_to_id => current_user  }).id), method: :post,remote: true , class: 'btn btn-primary'%>
+            <% end %>
+            <a  data-toggle="modal" data-target="#pm" class="btn btn-info">
+              <i class="fa fa-comment-o"></i>
+            </a>
+          </div>
+
+      </div>
+
+
+      <% end%>
+                        <% if current_user.profile_id == @profile.id %>
+                            <div class="page-header">
+                              <h1><%= t 'other.uploadprofile' %> <small><%= t 'other.dis_imag' %></small></h1>
+                            </div>
+
+                            <%= form_for(PhotoEvent.new, html: {multipart: true}) do |f| %>
+
+                            <%= f.hidden_field :profile_id ,value: @profile.id %><br>
+                            <%= f.file_field :photo, :style =>'visibility:hidden;'%>
+                            <div class="row">
+                              <div class="col-sm-3 ">
+                                <a href="#" class="upload_photo">
+                                  <i id='edit' class="fa fa-camera fa-2x"></i>
+                                </a>
+                                <img id="previewHolder" style='width:125px;height:185px; border:5px solid #fff;shadow:0 0 4px rgba(0, 0, 0, 0.5);' />
+                              </div>
+                              <div class="col-sm-9 ">
+                                <%= f.text_area :summary , class: 'form-control' , rows: '5' , placeholder: "#{t('other.disuploadplace')}"%><br>
+                                    <%= f.submit t('other.upload'), :class => 'btn btn-primary pull-right', :id => 'submit_photo'%>
+                              </div>
+                            </div>
+
+
+                                      <% end  %>
+                            </div>
+                        <% end  %>
+
+
+                                <script type="text/javascript">
+
+    $(function() {
+            if ($('.pagination').length) {
+            $(window).scroll(function() {
+                var url;
+                    url = $('.pagination .next_page').attr('href');
+                    if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 100) {
+                        $('.pagination').text('<%= t 'other.loading' %> ....').attr('style','color: white');
+                        return $.getScript(url);
+                }
+            });
+            }
+        //Showing Preview of uploaded image
+            $('#edit').click(function() {
+                $('input[type=file]').click();
+            });
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#previewHolder').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+        $("#photo_event_photo").change(function() {
+            readURL(this);
+        });
+
+    });
+
+
+</script>
+
+
+
+
+
+

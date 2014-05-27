@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @likable.user %>
+</p>
+
+<p>
+  <strong>Photo event:</strong>
+  <%= @likable.photo_event %>
+</p>
+
+<%= link_to 'Edit', edit_likable_path(@likable) %> |
+<%= link_to 'Back', likables_path %>

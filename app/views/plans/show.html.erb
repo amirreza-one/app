@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Total cal:</strong>
+  <%= @plan.total_cal %>
+</p>
+
+<p>
+  <strong>Total protein:</strong>
+  <%= @plan.total_protein %>
+</p>
+
+<p>
+  <strong>Total carbohydrate:</strong>
+  <%= @plan.total_carbohydrate %>
+</p>
+
+<p>
+  <strong>Total fat:</strong>
+  <%= @plan.total_fat %>
+</p>
+
+<%= link_to 'Edit', edit_plan_path(@plan) %> |
+<%= link_to 'Back', plans_path %>

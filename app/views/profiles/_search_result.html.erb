@@ -1,0 +1,4 @@
+<% @search_box.each do |profile| %>
+    <li ><%= link_to raw("#{image_tag profile.avatar.url(:small), class: "img-circle " , width: "35" , height: "35"} #{profile.firstname} #{profile.lastname}<br /><span>#{profile.user.email}</span>"),profile ,style: 'color: #808394'%></li>
+<% end %>
+<li><%= link_to raw( t 'other.more_result'),profiles_path ,style: 'color: #808394'%></li>

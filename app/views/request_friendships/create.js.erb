@@ -1,0 +1,13 @@
+$(function(){
+    new PNotify({
+        title: '<%= t 'other.congratulation' %>',
+        text: '<%= notice %>',
+        type: 'success',
+        styling: 'fontawesome',
+        icon: 'fa fa-users',
+        hide: true
+    });
+});
+<%@iscreate=true%>
+$('#profileButtons').html("<%=  escape_javascript(render partial: 'profiles/profileButtons')%>");
+<%= flash[:notice]="" %>

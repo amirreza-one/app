@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag   'application','pnotify.custom.min', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application','pnotify.custom.min','partial/search_layout','SideNavigation/modernizr.custom', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'Video Gallery/html5gallery' , 'Flipclock/base' , 'Flipclock/flipclock' , 'Flipclock/hourlycounter' , 'Flipclock/minutecounter' %>
+  <%= stylesheet_link_tag 'Flipclock/flipclock','SideNavigation/icons','SideNavigation/normalize' , media: 'all' %>
+  <title>Profile . Virtual GYM</title>
+  <!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
+  <script>var __adobewebfontsappname__="dreamweaver"</script>
+  <%= csrf_meta_tag %>
+</head>
+
+<body style="background-color: #2e2e2e"  >
+<!-- Added 1 -->
+<div id="st-container" class="st-container">
+  <!--
+      example menus
+      these menus will be on top of the push wrapper
+  -->
+
+
+
+  <nav class="st-menu st-effect-12" id="menu-12">
+    <h2  style="color:
+            #FFF"><i class="fa fa-tasks"></i> Menu</h2>
+    <ul>
+      <% unless current_user.nil? || current_user.profile.nil?%>
+
+          <li><%= link_to  raw("<i class='fa fa-home fa-2x'></i> #{ t('activemodel.activerecord.attributes.profile.home')}") , controller: "/profiles", action: "show", id: current_user.profile_id %></li>
+          <li><%= link_to  raw("<i class='fa fa-envelope fa-2x'></i> #{t('activemodel.activerecord.attributes.profile.inbox') } <span class='badge'>#{@inbox}</span>") ,  :controller => '/messages' , :action => 'inbox' %></li>
+          <li><%= link_to  raw("<i class='fa fa-trophy fa-2x'></i> #{t('activemodel.activerecord.attributes.profile.workouts')}") , workouts_path %></li>
+          <li><%= link_to  raw("<i class='fa fa-group fa-2x'></i> #{t('activemodel.activerecord.attributes.profile.friends')}") , profiles_index_friend_path , remote:true %></li>
+          <li><%= link_to  raw("<i class='fa fa-signal fa-2x'></i> #{t('activemodel.activerecord.attributes.profile.chart')}") , controller: '/charts' , action: 'index' %></li>
+          <li><%= link_to  raw("<i class='fa fa-tachometer fa-2x'></i> #{t('activemodel.activerecord.attributes.profile.challenges')}") , "#" %></li>
+          <li><%= link_to  raw("<i class='fa fa-cutlery fa-2x'></i> #{t('activemodel.activerecord.attributes.profile.nutrition')}") , "#" %></li>
+          <!--
+    <li><%= link_to  raw("<i class='fa fa-flash fa-2x'></i> #{t('activemodel.activerecord.attributes.profile.becomepro')}") , "#" %></li>
+    <li><%= link_to  raw("<i class='fa fa-cogs fa-2x'></i> #{t('activemodel.activerecord.attributes.profile.editprofile')}") , "#" %></li>
+    <li><%= link_to  raw("<i class='fa fa-shield fa-2x'></i> #{t('activemodel.activerecord.attributes.profile.editaccount')}") , "#" %></li>
+    <li><%= link_to  raw("<i class='fa fa-power-off fa-2x'></i> #{t('activemodel.activerecord.attributes.profile.logout')}") , "#" %></li> -->
+      <% end %>
+    </ul>
+  </nav>
+
+
+
+  <!-- content push wrapper -->
+  <div class="st-pusher">
+
+
+    <div class="st-content main_body" ><!-- this is the wrapper for the content -->
+      <div class="st-content-inner"><!-- extra div for emulating position:fixed of the menu -->
+        <!-- Top Navigation -->
+        <div class="codrops-top clearfix">
+          <!-- /Added 1 -->
+
+
+
+          <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a id="khar" class="navbar-brand brand-font" href="#"><span class="glyphicon glyphicon-record">  </span>  Virtual GYM</a>
+              </div>
+
+
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <ul class="nav navbar-nav navbar-right">
+                  <!-- SEARCHBOX -->
+
+                  <li id="search_box">
+                    <section class="main">
+                      <%= form_tag  profiles_path,remote: true,method: 'get' , class: 'search',id: 'body_search',autocomplete: 'off' do %>
+                          <%= text_field_tag :search, params[:search] ,:class => 'form-control ' ,placeholder: 'Search...', id: 'search_input' %>
+                          <ul class="results" id="results">
+
+                          </ul>
+                          </p>
+                      <% end %>
+                    </section>
+                  </li>
+
+                  <!-- SEARCHBOX -->
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-align-justify"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#"><span class="glyphicon glyphicon-flash">  </span> t('profile.exercise') </a></li>
+                      <li><a href="#"><span class="glyphicon glyphicon-road">  </span> t('profile.challenges')</a></li>
+                      <li><a href="#"><span class="glyphicon glyphicon-sort-by-attributes">  </span> t('profile.bodymetric')</a></li>
+                      <li><a href="#"><span class="glyphicon glyphicon-cutlery">  </span> t('profile.nutrition')</a></li>
+                    </ul>
+                  </li>
+
+                  <!-- Admin Part -->
+                  <li class="dropdown">
+                    <% unless current_user.nil? || current_user.profile_id.nil? %>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-eye-open">  </span> Admin</a>
+                        <ul class="dropdown-menu">
+                          <li><%= link_to "Users" , controller: "/profiles", action: "index"%></li>
+                          <li><%= link_to "Foods" , controller: "/foods", action: "index"%></li>
+                          <li><%= link_to "Exercise" , controller: "/exercises", action: "index"%></li>
+                          <li><%= link_to "Plans" , controller: "/plans", action: "index"%></li>
+                        </ul>
+                    <% end %>
+                  </li>
+
+                  <!-- end Admin Part -->
+
+                  <% unless current_user.nil? || current_user.profile_id.nil? %>
+                      <li > <%= link_to raw("<span class='glyphicon glyphicon-user'></span> #{current_user.profile.firstname.capitalize} "), controller: "/profiles", action: "show", id: current_user.profile_id%></li>
+                  <% end %>
+                  <li class="dropdown">
+                    <% unless current_user.nil? || current_user.profile_id.nil? %>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down">  </span></a>
+                        <ul class="dropdown-menu <%= t 'other.menuright' %>">
+                          <li><a href="#"><span class="glyphicon glyphicon-tower">  </span>  Become Pro</a></li>
+                          <li><%= link_to raw('<span class="glyphicon glyphicon-pencil"></span> Edit Profile') , controller: "/profiles", action: "edit", id: current_user.profile_id  %></li>
+                          <li><%= link_to raw('<span class="glyphicon glyphicon-cog"></span> Edit Account') , edit_user_registration_path  %></li>
+                          <li class="divider"></li>
+                    <% end %>
+                    <!--<li><a href="#"><span class="glyphicon glyphicon-off">  </span>  Logout</a></li>-->
+                    <li><%= link_to raw('<span class="glyphicon glyphicon-off">  </span>  Logout'), destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+                    </ul>
+                  </li>
+
+                </ul>
+              </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+          </nav>
+
+        </div>
+
+        <div class="main clearfix main_body">
+
+          <!-- END OF NAVBAR -->
+          <div class="mainDiv">
+
+            <%= yield %>
+
+          </div>
+
+          <div id="st-trigger-effects" class="column">
+            <% unless current_user.nil? ||current_user.profile.nil? %>
+                <button class="fixleft" data-effect="st-effect-12" ><i class='fa fa-th-list fa-2x'></i></button>
+            <%end%>
+          </div>
+
+        </div><!-- /main -->
+      </div><!-- /st-content-inner -->
+    </div><!-- /st-content -->
+  </div><!-- /st-pusher -->
+</div><!-- /st-container -->
+
+
+
+
+<%= javascript_include_tag 'SideNavigation/classie','SideNavigation/sidebarEffects' %>
+</body>
+</html>

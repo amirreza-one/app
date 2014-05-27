@@ -1,0 +1,70 @@
+<%= form_for(@workout_plan, :id => 'submitForm') do |f| %>
+  <% if @workout_plan.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@workout_plan.errors.count, "error") %> prohibited this workout_plan from being saved:</h2>
+
+      <ul>
+      <% @workout_plan.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <br>
+
+    <div class="row">
+      <div class="col-md-5 col-sm-5 col-sx-10">
+        <div class="form-group">
+          <%= f.label t('other.name') ,:class => 'col-sm-4 control-label'%>
+          <div class="col-sm-8">
+            <%= f.text_field :name ,:class => 'form-control ', :placeholder => 'Name'%>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <br>
+    <div class="row">
+      <div class="col-md-5 col-sm-5 col-sx-10">
+        <div class="form-group">
+          <%= f.label t('other.part') ,:class => 'col-sm-4 control-label'%>
+          <div class="col-sm-8">
+            <%= f.select :part, ["ABS" , "Chest" , "Back" , "Legs" , "Arms" , 'All'] ,{}, {:class => 'form-control'}%>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <br>
+    <div class="row">
+      <div class="col-md-5 col-sm-5 col-sx-10">
+        <div class="form-group">
+          <%= f.label t('other.mode') ,:class => 'col-sm-4 control-label'%>
+          <div class="col-sm-8">
+            <%= f.select :mode, ['Free' , 'Premium'] ,{}, {:class => 'form-control'}%>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <!--<br>
+    <div class="row">
+      <div class="col-md-5 col-sm-5 col-sx-10">
+        <div class="form-group" id="userId">
+          # f.label :User, :class => 'col-sm-4 control-label'%>
+          <div class="col-sm-8">
+            # f.text_field :user_id, :class => 'form-control', :placeholder => 'User ID'%>
+          </div>
+        </div>
+      </div>
+    </div>-->
+
+
+  <br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

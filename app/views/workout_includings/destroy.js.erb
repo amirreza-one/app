@@ -1,0 +1,2 @@
+<% @iscreate=true %>
+$("#all_exercises").html("<%=  escape_javascript(render partial: 'workout_plans/remain_exercises', locals: {:workout_includings => @workout_including, :workout_id => @workout_plan_id} )  %>");

@@ -1,0 +1,13 @@
+<% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %>">
+      <%= value %>
+    </div>
+<% end %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @amount_type.name %>
+</p>
+
+<%= link_to 'Edit', edit_amount_type_path(@amount_type) %> |
+<%= link_to 'Back', amount_types_path %>

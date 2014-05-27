@@ -1,0 +1,40 @@
+<div class="modal fade" id="challenge_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="width: 90%">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><%= t 'other.compareyourself' %></h4>
+      </div>
+      <div class="modal-body" id="challenges" style="max-height: 500px; overflow: auto;">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'other.close' %></button>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+    .sort-link{
+        color: #ffffff;
+    }
+    .sort-link:hover{
+        color: #1bb6ec;
+        background-color: transparent;
+
+    }
+    .current-sorted{
+        color: gold;
+    }
+    .current-sorted:hover{
+        color: darkgoldenrod;
+        background-color: transparent;
+    }
+    .your-row{
+        color: #4b4878;
+        font-style: italic;
+        font-weight: bolder;
+        font-size: 22px;
+
+    }
+</style>

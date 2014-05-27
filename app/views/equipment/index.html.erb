@@ -1,0 +1,30 @@
+<h1><%=t 'other.listequip' %></h1><br>
+<%= link_to raw('<span class="glyphicon glyphicon-plus"></span>'), new_equipment_path ,:class => "btn btn-info"%><br><br>
+
+
+<div class="table-responsive">
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th><%= t'other.name'%></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @equipment.each do |equipment| %>
+      <tr>
+        <td><%= equipment.name %></td>
+        <td><%= link_to raw("<span class='glyphicon glyphicon-list-alt'></span> #{t'other.show'} "), equipment %></td>
+        <td><%= link_to raw("<span class='glyphicon glyphicon-pencil'></span>#{t'other.edit'}"), edit_equipment_path(equipment) %></td>
+        <td><%= link_to raw("<span class='glyphicon glyphicon-remove'></span> #{t'other.remove'}"), equipment, method: :delete, data: { confirm: 'Are you sure' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+  </div>
+
+<br>
+

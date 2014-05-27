@@ -1,0 +1,60 @@
+r<p id="notice"><%= notice %></p>
+
+<p>
+  <strong><%= t('other.name') %></strong>
+  <%= @workout_plan.name %>
+</p>
+<p>
+  <strong><%= t('other.part') %></strong>
+  <%= @workout_plan.part %>
+</p>
+<p>
+  <strong><%= t('other.mode') %></strong>
+  <%= @workout_plan.mode %>
+</p>
+<br>
+
+<div class="table-responsive" >
+  <table class="table table-hover" id="test">
+    <thead>
+    <tr>
+      <th></th>
+      <th><%= t('other.avatar') %></th>
+      <th><strong><%= t('other.part') %></strong></th>
+      <th><%= t('other.name') %></th>
+      <th><%= t('other.level') %></th>
+      <th><%= t('other.equipment') %></th>
+      <th><%= t('other.dpw') %></th>
+      <th><%= t('other.reps') %></th>
+      <th><%= t('other.duration') %></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @workout_includings.each do |workout_including| %>
+        <tr>
+          <td><%= image_tag workout_including.exercise.avatar.url(:thumb) ,{id: workout_including.exercise.id , class: "img-circle img-responsive img-thumbnail" , width: "100" , height: "100" , alt: "Exercise"}%>
+          <td><strong><%= workout_including.exercise.part %></strong></td>
+          <td><%= workout_including.exercise.name.capitalize %></td>
+          <td>
+            <% case workout_including.exercise.level %>
+            <% when 0%>
+                <%= t('other.basic') %>
+            <% when 1%>
+                <%= t('other.inter') %>
+            <% when 2%>
+                <%= t('other.diff') %>
+            <% end%>
+          </td>
+          <td><%= workout_including.exercise.equipment.name.capitalize %></td>
+          <td><%= workout_including.exercise.days_per_week %></td>
+          <td><%= workout_including.reps %></td>
+          <td><%= workout_including.duration %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= link_to t('other.edit'), edit_workout_plan_path(@workout_plan) %> |
+<%= link_to t('other.back'), workout_plans_path %>

@@ -1,0 +1,62 @@
+<h1>t('profile.food_list')</h1><br>
+
+<br>
+<%= form_tag profiles_path, :method => 'get' , :class => 'form-inline' do %>
+    <p>
+    <div class="form-group">
+      <%= text_field_tag :search, params[:search] ,:class => 'form-control ' ,:placeholder => t('profile.enterplace')%>
+    </div>
+    <div class="form-group">
+      <%= submit_tag t('profile.search'),:class => 'btn btn-primary ', :name => nil %>
+    </div>
+    </p>
+<% end %>
+
+<br>
+<br>
+<div class="table-responsive ">
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Picture</th>
+      <th>Name</th>
+      <th>Calory</th>
+      <th>Protein</th>
+      <th>Carbohydrate</th>
+      <th>Fat</th>
+      <th>Amount type</th>
+      <th>Per</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @foods.each do |food| %>
+      <tr>
+        <td><%= image_tag food.avatar.url(:thumb) ,{id: food.id , class: "img-circle img-responsive img-thumbnail" , width: "100" , height: "100" , alt: "Fruit"}%>
+        <td><%= food.name %></td>
+        <td><%= food.calory %></td>
+        <td><%= food.protein %></td>
+        <td><%= food.carbohydrate %></td>
+        <td><%= food.fat %></td>
+        <td><%= food.amount_type.name %></td>
+        <td><%= food.per %></td>
+        <td><%= link_to raw('<span class="glyphicon glyphicon-list-alt"></span>Show'), food %></td>
+        <td><%= link_to raw('<span class="glyphicon glyphicon-pencil"></span>Edit'), edit_food_path(food) %></td>
+        <td><%= link_to raw('<span class="glyphicon glyphicon-remove"></span>Destroy'), food, method: :delete, data: { confirm: t('profile.removequest') } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+  </div>
+
+<br>
+
+<%= link_to raw('<span class="glyphicon glyphicon-plus"></span>'), new_food_path ,:class => "btn btn-primary" , :style => "color: rgb(255,255,255);"%><br><br>
+<br>
+
+<%= will_paginate @foods, renderer: BootstrapPagination::Rails %>
+
+

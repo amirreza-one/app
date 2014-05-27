@@ -1,0 +1,16 @@
+$(function(){
+    new PNotify({
+        title: '<%= t 'other.congratulation' %>',
+        text: '<%= notice %>',
+        type: 'success',
+        styling: 'fontawesome',
+        icon: 'fa fa-users',
+        hide: true
+    });
+});
+$('#profileButtons .btn-primary').html("<i class='fa fa-user'></i> Unfriend");
+$('#profileButtons .btn-primary').attr('data-method','delete');
+$('#profileButtons .btn-primary').attr('href','/friendships/<%= @friendship.id %>')
+<%= flash[:notice]="" %>
+$('#allPicForFriend').html("<div class='mainDiv' id='photo_events' style='background-color: rgba(255,255,255,0.1); margin-top: -4.5%; margin-bottom: 5%; padding-top: 10px;'><%=  escape_javascript(render partial: 'profiles/photo_events')%> </div>");
+$('#modalRequestDiv').html("<%= escape_javascript(render 'profiles/requests') %>");

@@ -1,0 +1,518 @@
+fa:
+  date:
+    abbr_day_names:
+    - ی
+    - د
+    - س
+    - چ
+    - پ
+    - ج
+    - ش
+    abbr_month_names:
+    -
+    - ژانویه
+    - فوریه
+    - مارس
+    - آوریل
+    - مه
+    - ژوئن
+    - ژوئیه
+    - اوت
+    - سپتامبر
+    - اکتبر
+    - نوامبر
+    - دسامبر
+    day_names:
+    - یکشنبه
+    - دوشنبه
+    - سه‌شنبه
+    - چهارشنبه
+    - پنج‌شنبه
+    - جمعه
+    - شنبه
+    formats:
+      default: ! '%Y/%m/%d'
+      long: ! '%e %B %Y'
+      short: ! '%m/%d'
+    month_names:
+    -
+    - ژانویه
+    - فوریه
+    - مارس
+    - آوریل
+    - مه
+    - ژوئن
+    - ژوئیه
+    - اوت
+    - سپتامبر
+    - اکتبر
+    - نوامبر
+    - دسامبر
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: حدود یک ساعت
+        other: حدود %{count} ساعت
+      about_x_months:
+        one: حدود یک ماه
+        other: حدود %{count} ماه
+      about_x_years:
+        one: حدود یک سال
+        other: حدود %{count} سال
+      almost_x_years:
+        one: حدود یک سال
+        other: حدود %{count} سال
+      half_a_minute: نیم دقیقه
+      less_than_x_minutes:
+        one: کمتر از یک دقیقه
+        other: کمتر از %{count} دقیقه
+      less_than_x_seconds:
+        one: یک ثانیه
+        other: کمتر  از %{count} ثانیه
+      over_x_years:
+        one: بیش از یک سال
+        other: بیش از %{count} سال
+      x_days:
+        one: یک روز
+        other: ! '%{count} روز'
+      x_minutes:
+        one: یک دقیقه
+        other: ! '%{count} دقیقه'
+      x_months:
+        one: یک ماه
+        other: ! '%{count} ماه'
+      x_seconds:
+        one: یک ثانیه
+        other: ! '%{count} ثانیه'
+    prompts:
+      day: روز
+      hour: ساعت
+      minute: دقیقه
+      month: ماه
+      second: ثانیه
+      year: سال
+  errors: &errors
+    format: ! '%{attribute} %{message}'
+    messages:
+      accepted: باید پذیرفته شود
+      blank: نباید خالی باشد
+      confirmation: با تایید نمی‌خواند
+      empty: نمی‌تواند خالی باشد
+      equal_to: باید برابر %{count} باشد
+      even: باید زوج باشد
+      exclusion: رزرو است
+      greater_than: باید بزرگتر از %{count} باشد
+      greater_than_or_equal_to: باید بزرگتر یا برابر %{count} باشد
+      inclusion: در لیست موجود نیست
+      invalid: نامعتبر است
+      less_than: باید کمتر از %{count} باشد
+      less_than_or_equal_to: باید کمتر یا برابر %{count} باشد
+      not_a_number: عدد نیست
+      not_an_integer: عدد صحیح نیست
+      odd: باید فرد باشد
+      record_invalid: رکورد نامعتبر است %{errors}
+      taken: پیشتر گرفته شده
+      too_long: بلند است (حداکثر %{count} کاراکتر)
+      too_short: کوتاه است (حداقل %{count} کاراکتر)
+      wrong_length: نااندازه است (باید %{count} کاراکتر باشد)
+    template:
+      body: ! 'موارد زیر مشکل داشت:'
+      header:
+        one: 1 خطا جلوی ذخیره این %{model} را گرفت
+        other: ! '%{count} خطا جلوی ذخیره این %{model} را گرفت'
+  helpers:
+    select:
+      prompt: لطفا انتخاب کنید
+    submit:
+      create: ! 'ایجاد %{model}'
+      submit: ! 'ذخیره‌ی %{model}'
+      update: ! 'بروز رسانی %{model}'
+  number:
+    currency:
+      format:
+        delimiter: ٬
+        format: ! '%n %u'
+        precision: 0
+        separator: ٫
+        significant: false
+        strip_insignificant_zeros: false
+        unit: ﷼
+    format:
+      delimiter: ٬
+      precision: 2
+      separator: .
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion: میلیارد
+          million: میلیون
+          quadrillion: کادریلیون
+          thousand: هزار
+          trillion: تریلیون
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 1
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: بایت
+            other: بایت
+          gb: گیگابایت
+          kb: کیلوبایت
+          mb: مگابایت
+          tb: ترابایت
+    percentage:
+      format:
+        delimiter: ''
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: ! ' و '
+      two_words_connector: ! ' و '
+      words_connector: ! '، '
+  time:
+    am: قبل از ظهر
+    formats:
+      default: ! '%A، %e %B %Y، ساعت %H:%M:%S (%Z)'
+      long: ! '%e %B %Y، ساعت %H:%M'
+      short: ! '%e %B، ساعت %H:%M'
+    pm: بعد از ظهر
+  # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
+  activerecord:
+      models:
+       amount_type: 'واحد'
+       equipment: 'تجهیزات'
+       exercise: 'حرکت'
+       profile: 'پروفایل'
+       food: 'غذا'
+       friendship: 'دوستی'
+       plan: 'Plan'
+       taking_food_plan: 'اخذ برنامه ی غذایی'
+       user: 'کاربر'
+       workout: 'ورزش'
+       workout_plan: 'برنامه ی ورزشی'
+  activemodel:
+      attributes:
+       profile:
+         direction: "style='direction: rtl'"
+         gender: "جنسیت"
+         pull: "pull-right"
+         age: "سن"
+         photos: "تصاویر"
+         language: "زبان"
+         inbox: "پیام ها"
+         friends: "دوستان"
+         height: "قد"
+         weight: "وزن"
+         country: "کشور"
+         city: "شهر"
+         totalcal: "کالری"
+         totalTime: "زمان کل"
+         level: "سطح"
+         totalDistance: "مسافت کل"
+         home: "خانه"
+         workouts: "ورزش ها"
+         challenges: "رقابت"
+         chart: "نمودار"
+         nutrition: "برنامه غذایی"
+         excercise: "حرکات"
+         bodymetric: "متریک بدن"
+         becomepro: "حرفه ای شوید"
+         editprofile: "ویرایش پروفایل"
+         logout: "خروج"
+         firstname: "نام"
+         lastname: "نام خانوادگی"
+         profpic: " عکس پروفایل"
+         coverpic: "عکس کاور"
+         birthdate: "تاریخ تولد"
+         heightplace: "قد(سانتی متر)"
+         weightplace: "وزن(کیلوگرم)"
+         edit: "ویرایش"
+         go: "برو"
+         role: "نقش"
+         show: "نمایش"
+         remove: "حذف"
+         removequest: "آیا مطمئنید؟"
+         enterplace: "کاربر را وارد کنید"
+         search: "جستجو"
+         listprof: "فهرست پروفایل ها"
+         newprof: "پروفایل جدید"
+         proferror: "امکان ذخیره ی این پروفایل وجود ندارد."
+       plan:
+         totalprotein: "پروتیین کل"
+         totalcarb: "کربوهیدرات کل"
+         totalfat: "چربی کل"
+         editplan: " ویرایش برنامه"
+         create: "ایجاد"
+         listplan: "فهرست برنامه ها"
+         newplan: "برنامه ی جدید"
+         back: "بازگشت"
+         plan_err: "امکان ذخیره ی این برنامه وجود ندارد."
+         workout_plan:
+         name: "نام"
+         workout_plan_error: "امکان ذخیره ی این برنامه ی ورزشی وجود ندارد."
+         user_id: "شناسه ی کاربری"
+         workout_plan_id: "شناسه ی برنامه ی ورزشی"
+         date: "تاریخ"
+         totalmin: "مجموع دقایق"
+       workout:
+         workout_title: "عنوان تمرین ورزشی"
+         list_workout: "فهرست برنامه های ورزشی"
+         new_workout: "برنامه ی ورزشی جدید"
+         workout_plan: "برنامه"
+         workout-err: "امکان ذخیره ی این ورزش وجود ندارد."
+         editing_workouts: "ویرایش ورزش ها"
+         new_workout: "ورزش جدید"
+       amounttypes:
+         amounterror: "امکان ذخیره ی این واحد وجود ندارد."
+         editamount: "ویرایش واحد"
+         listamount: "فهرست واحدها"
+         newamount: "واحد جدید"
+         amount_id: "شناسه ی واحد"
+         manage_amount: "مدیریت واحدها"
+       equipment:
+         equip_error: "امکان ذخیره ی این تجهیزات وجود ندارد."
+         editequip: "ویرایش تجهیزات"
+         listequip: "فهرست تجهیزات"
+         newequip: "تجهیزات جدید"
+         equip: "تجهیزات"
+       exercises:
+         ex_error: "امکان ذخیره ی این حرکت وجود ندارد."
+         part: "عضو بدن"
+         abs: "شکم"
+         chest: "سینه"
+         back: "Back"
+         leg: "پا"
+         arms: "بازو"
+         dpw: "روز در هفته"
+         basic: "ساده"
+         inter: "متوسط"
+         diff: "سخت"
+         equipid: "شناسه ی تجهیزات"
+         descp: "شرح انگلیسی"
+         descp_fa: "شرح فارسی"
+         vid_link: "لینک ویدیو"
+         avatar: "نماد"
+         ex_edit: "تدوین حرکات"
+         ex_list: "فهرست حرکات"
+         new_ex: "افزودن حرکت جدید"
+       food:
+         food_err: "امکان ذخیره ی این غذا وجود ندارد. "
+         per: "در هر"
+         protein: "پروتیین"
+         carb: "کربوهیدرات"
+         cal: "کالری"
+         fat: "چربی"
+         pic: "تصویر"
+         edit_food: "ویرایش غذاها"
+         food_list: "فهرست غذاها"
+         new_food: "غذای جدید"
+  other:
+     direction: "style='direction: rtl'"
+     gender: "جنسیت"
+     pull: "pull-right"
+     age: "سن"
+     photos: "تصاویر"
+     language: "زبان"
+     inbox: "پیام ها"
+     friends: "دوستان"
+     height: "قد"
+     weight: "وزن"
+     country: "کشور"
+     city: "شهر"
+     abss: "شکم"
+     backk: "کمر"
+     totalcal: "کالری"
+     totalTime: "زمان کل"
+     level: "سطح"
+     totalDistance: "مسافت کل"
+     home: "خانه"
+     workouts: "ورزش ها"
+     challenges: "رقابت"
+     chart: "نمودار"
+     nutrition: "برنامه غذایی"
+     excercise: "حرکات"
+     bodymetric: "متریک بدن"
+     becomepro: "حرفه ای شوید"
+     editprofile: "ویرایش پروفایل"
+     logout: "خروج"
+     firstname: "نام"
+     lastname: "نام خانوادگی"
+     profpic: " عکس پروفایل"
+     coverpic: "عکس کاور"
+     birthdate: "تاریخ تولد"
+     heightplace: "قد(سانتی متر)"
+     weightplace: "وزن(کیلوگرم)"
+     edit: "ویرایش"
+     go: "برو"
+     role: "نقش"
+     show: "نمایش"
+     remove: "حذف"
+     removequest: "آیا مطمئنید؟"
+     enterplace: "جستجوی کاربر"
+     search: "جستجو"
+     listprof: "فهرست پروفایل ها"
+     newprof: "پروفایل جدید"
+     proferror: "امکان ذخیره ی این پروفایل وجود ندارد."
+     totalprotein: "پروتیین کل"
+     totalcarb: "کربوهیدرات کل"
+     totalfat: "چربی کل"
+     editplan: " ویرایش برنامه"
+     create: "ایجاد"
+     listplan: "فهرست برنامه ها"
+     newplan: "برنامه ی جدید"
+     back: "بازگشت"
+     plan_err: "امکان ذخیره ی این برنامه وجود ندارد."
+     workout_plan:
+     name: "نام"
+     workout_plan_error: "امکان ذخیره ی این برنامه ی ورزشی وجود ندارد."
+     user_id: "شناسه ی کاربری"
+     workout_plan_id: "شناسه ی برنامه ی ورزشی"
+     date: "تاریخ"
+     totalmin: "مجموع دقایق"
+     workout_title: "عنوان تمرین ورزشی"
+     list_workout: "فهرست برنامه های ورزشی"
+     workout_plan: "برنامه"
+     workout-err: "امکان ذخیره ی این ورزش وجود ندارد."
+     editing_workouts: "ویرایش ورزش ها"
+     new_workout: "برنامه ی مورد نظر خود را انتخاب کنید"
+     amounterror: "امکان ذخیره ی این واحد وجود ندارد."
+     editamount: "ویرایش واحد"
+     listamount: "فهرست واحدها"
+     newamount: "واحد جدید"
+     amount_id: "شناسه ی واحد"
+     manage_amount: "مدیریت واحدها"
+     equip_error: "امکان ذخیره ی این تجهیزات وجود ندارد."
+     editequip: "ویرایش تجهیزات"
+     listequip: "فهرست تجهیزات"
+     newequip: "تجهیزات جدید"
+     equip: "تجهیزات"
+     ex_error: "امکان ذخیره ی این حرکت وجود ندارد."
+     part: "عضله"
+     abs: "عضله "
+     chest: "سینه"
+     leg: "پا"
+     arms: "بازو"
+     dpw: "روز در هفته"
+     basic: "مقدماتی"
+     inter: "متوسط"
+     diff: "دشوار"
+     equipid: "شناسه ی تجهیزات"
+     descp: "شرح انگلیسی :"
+     descp_fa: "شرح فارسی :"
+     type: "عضله :"
+     vid_link: "لینک ویدیو"
+     avatar: "تصویر"
+     ex_edit: "ویرایش حرکات"
+     ex_list: "فهرست حرکات"
+     home: "خانه"
+     new_ex: "افزودن حرکت جدید"
+     food_err: "امکان ذخیره ی این غذا وجود ندارد. "
+     inbox: "پیام ها"
+     per: "در هر"
+     protein: "پروتیین"
+     carb: "کربوهیدرات"
+     cal: "کالری"
+     fat: "چربی"
+     pic: "تصویر"
+     edit_food: "ویرایش غذاها"
+     food_list: "فهرست غذاها"
+     new_food: "غذای جدید"
+     friendreq: "درخواست دوستی"
+     username: "نام کاربری"
+     moreres: "بیشتر"
+     profiles: "پروفایل ها"
+     searchfriend: "جستجو"
+     male: "مرد"
+     female: "زن"
+     photos: "عکس ها"
+     equipment: "تجهیزات"
+     start: "ورزش امروز را شروع کنید"
+     premium: "حرفه ای"
+     sstart: "شروع"
+     welcome: "خوش آمدید!"
+     fitness_start: "برای انجام هر تمرین پس از خواندن توضیحات و یا مشاهده ی ویدیوی مربوطه  دکمه ی شروع را بزنید  "
+     good_job: "خسته نباشی!"
+     difquest: "سطح این ورزش را چگونه ارزیابی می کنید؟"
+     low: "ساده"
+     medium: "متوسط"
+     high: "سخت"
+     well: "خوب!"
+     rest: " ۳۰ ثانیه استراحت کنید !"
+     do: ""
+     for: "را"
+     times: "بار انجام دهید"
+     dis_rest_1: "بعد از استراحت توضیحات یا ویدئو ورزش "
+     dis_rest_2: را مشاهده کنید و سپس <strong> شروع </strong> را کلیک کنید
+     dis_for: "<strong>توضیحات</strong> "
+     next_button: "بعدی"
+     start_button: "شروع"
+     stop_button: "توقف"
+     enter_heart_rate: "ضربان قلب خود را وارد کنید ( اختیاری ):"
+     finish: "پایان"
+     heart_rate_place: ضربان قلب ( تعداد ضربان در دقیقه )
+     reps: "تعداد"
+     duration: "زمان"
+     mode: "نوع برنامه"
+     add: "افزودن"
+     add_ex: "افزودن ورزش"
+     done: انجام شد
+     congratulation: "تبریک"
+     from: "از طرف"
+     content: "متن"
+     sent: "ارسال شده ها"
+     to: "به"
+     cancel: انصراف درخواست
+     accept: "قبول درخواست"
+     ignore: "رد درخواست"
+     more_result: "نتایج بیشتر <br /><span>پروفایل ها</span>"
+     easy: "مقدماتی"
+     cal_e: "کالری"
+     unfriend: "لغو دوستی"
+     loading: "درحال بارگزاری"
+     cm: "سانتی متر"
+     kg: "کیلوگرم"
+     yearsold: "سال"
+     uploadprofile: "عکس های خود را در صفحه ی پروفایل خود آپلود کنید"
+     dis_imag: ""
+     disuploadplace: در مورد تصویر توضیح دهید
+     upload: "آپلود"
+     request: "درخواست"
+     close: "خروج"
+     message: "ارسال پیام"
+     contentmessage: "محتوا پیغام"
+     send: "ارسال پیغام"
+     compareyourself: "خود را با دوستانتان مقایسه کنید"
+     rank: "رتبه"
+     lastactivity: "آخرین فعالیت"
+     bmichart: "نمودار BMI"
+     right: "left"
+     admin: "کنترل سایت"
+     users: "کاربران"
+     workoutplan: "برنامه های ورزشی"
+     exercise: "ورزش ها"
+     menuright: "pull-left"
+     menu: "منو"
+     virtualgym: "باشگاه مجازی"
+     editaccount: "ویرایش اکانت"
+     create_success: "ایجاد موفقیت آمیز بود"
+     update_success: "به روز رسانی موفقیت آمیز بود"
+     isyourfriend: "%{name} هم اکنون به دوستان شما اضافه شد."
+     request_canceled: "درخواست دوستی لغو شد"
+     request_sent: "پیغام دوستی شما به %{name} ارسال گردید."
+     notyourfriend: "%{name} دیگر در لیست دوستان شما نیست"
+     message_sent: "پیام ارسال گردید"
+     burn_cal_in_sec: "شما %{total_cal} کالری را در %{total_min} ثانیه سوزانده اید."

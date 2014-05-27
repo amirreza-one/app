@@ -1,0 +1,2 @@
+module AmountTypesHelper
+end

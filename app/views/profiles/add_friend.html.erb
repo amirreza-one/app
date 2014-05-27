@@ -1,0 +1,33 @@
+
+<br>
+<br>
+<p id="notice"><%= notice %></p>
+<h1>Search Friends </h1>
+<br>
+
+<%= javascript_include_tag "partial/add_friend_ajax" %>
+
+
+<%= form_tag({controller: "profiles", action: "add_friend"}, method: "get", class: "form-inline" , id: "friend_search") do %>
+    <p>
+    <div class="form-group">
+      <%= text_field_tag :search, params[:search] ,:class => 'form-control ' ,:placeholder => "Enter User"%>
+    </div>
+    <div class="form-group">
+      <%= submit_tag "Search",:class => 'btn btn-primary ', :name => nil %>
+    </div>
+    </p>
+<% end %>
+
+<br>
+<br>
+<div id="friend">
+  <%= render partial: 'friends' %>
+</div>
+<br>
+
+<h1>Friends </h1>
+<br>
+<div id="friended">
+  <%= render partial: 'friended' %>
+</div>

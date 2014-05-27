@@ -1,0 +1,52 @@
+fa:
+  devise:
+    confirmations:
+      confirmed: حساب شما تایید شده. اکنون شما وارد شده اید.
+      send_instructions: به زودی ایمیلی شامل دستورالعمل چگونگی تایید حسابتان دریافت خواهید کرد.
+    failure:
+      inactive: حساب شما هنوز فعال نشده‌است.
+      invalid: نشانی رایانامه یا گذرواژهٔ نامعتبر.
+      invalid_token: نشانه تایید اعتبار نامعتبر.
+      locked: حساب شما قفل شده‌است.
+      timeout: نشست حساب شما منقضی شده‌است، لطفا برای ادامه دوباره به سامانه وارد شوید.
+      unauthenticated: شما قبل از ادامه کار باید به سامانه وارد شوید و یا ثبت نام کنید.
+      unconfirmed: شما قبل از ادامه کار باید حساب کاربری خود را تأیید کنید.
+    mailer:
+      confirm_account:
+        link: تأیید حساب کاربری
+        welcome: خوش آمدید
+      confirmation_instructions:
+        subject: دستورالعمل‌های تأیید
+      hello: سلام
+      reset_password:
+        link: تغییر گذرواژهٔ من
+      reset_password_instructions:
+        subject: تنظیم مجدد رمز عبور
+      unlock_instructions:
+        subject: دستورالعملهای باز کردن قفل حساب
+    passwords:
+      link: رمز خود را فراموش کرده اید؟
+      send_instructions: در کمتر از چند دقیقه شما ایمیلی شامل دستورالعمل تنظیم مجدد رمز عبورتان دریافت خواهید کرد
+      updated: رمز عبور شما تغییر کرد. اکنون شما وارد شده اید.
+    registrations:
+      destroyed: خداحافظ! حساب شما لغو شد. امیدواریم شما را به زودی دوباره ببینیم.
+      link: ثبت نام
+      signed_up: شما ثبت نام شدید.
+      updated: شما حساب خود را به روز کردید.
+    sessions:
+      link: ورود
+      new:
+        remember_me: تنظیمات را به یاد داشته باشید
+      registered_only: برای دیدن محتوا باید به سامانه وارد شوید.
+      sign_out: خروج
+      signed_in: وارد شدید
+      signed_out: خارج شدید
+    unlocks:
+      link: آیا دستورالعمل باز کردن قفل را دریافت نکردید؟
+      send_instructions: به زودی ایمیلی شامل دستورالعمل چگونگی باز کردن قفل حسابتان دریافت خواهید کرد.
+      unlocked: قفل حساب شما باز شد. اکنون شما وارد شده اید.
+  errors:
+    messages:
+      already_confirmed: قبلا تاييد شده‌است
+      not_found: یافت نشد
+      not_locked: قفل نشده‌است

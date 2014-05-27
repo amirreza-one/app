@@ -1,0 +1,49 @@
+<h1><%= t('other.excercise')%> </h1><br>
+<%= link_to raw('<span class="glyphicon glyphicon-plus"></span>'), new_exercise_path ,:class => "btn btn-primary" , :style => "color: rgb(255,255,255);"%><br><br>
+<br>
+<div class="table-responsive">
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th><%= t'other.avatar'%></th>
+      <th><strong><%= t'other.abs'%></strong></th>
+      <th><%= t'other.name'%></th>
+      <th><%= t'other.level'%></th>
+      <th><%= t'other.equipment'%></th>
+      <th><%= t'other.dpw'%></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @exercises.each do |exercise| %>
+      <tr>
+        <td><%= image_tag exercise.avatar.url(:thumb) ,{id: exercise.id , class: "img-circle img-responsive img-thumbnail" , width: "100" , height: "100" , alt: "Exercise"}%>
+        <td><strong><%= exercise.part %></strong></td>
+        <td><%= exercise.name.capitalize %></td>
+        <td>
+            <% case exercise.level %>
+                <% when 0%>
+            <%= t('other.basic') %>
+                <% when 1%>
+            <%= t('other.inter') %>
+                <% when 2%>
+            <%= t('other.diff') %>
+            <% end%>
+        </td>
+        <td><%= exercise.equipment.name %></td>
+        <td><%= exercise.days_per_week %></td>
+        <td><%= link_to raw("<span class='glyphicon glyphicon-list-alt'></span> #{t('other.show')}"), exercise %></td>
+        <td><%= link_to raw("<span class='glyphicon glyphicon-pencil'></span> #{t('other.edit')}"), edit_exercise_path(exercise) %></td>
+        <td><%= link_to raw("<span class='glyphicon glyphicon-remove'></span> #{t('other.remove')}"), exercise, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+  </div>
+
+<br>
+<%= will_paginate @exercises, renderer: BootstrapPagination::Rails %>
+

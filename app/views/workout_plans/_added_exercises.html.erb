@@ -1,0 +1,49 @@
+<table class="table table-hover">
+    <thead>
+    <tr>
+      <th></th>
+      <th><%= t('other.avatar') %></th>
+      <th><strong><%= t('other.part') %></strong></th>
+      <th><%= t('other.name') %></th>
+      <th><%= t('other.level') %></th>
+      <th><%= t('other.equipment') %></th>
+      <th><%= t('other.dpw') %></th>
+      <th><%= t('other.reps') %></th>
+      <th><%= t('other.duration') %></th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @workout_including.each do |added_plan| %>
+        <!%# content_tag_for(:tr, added_plan.exercise.id) do %>
+            <tr id="tr_added_plan.exercise.id%>">
+            <td><span class="handle"> [Drag]</span></td>
+              <td><%= image_tag added_plan.exercise.avatar.url(:thumb) ,{id: added_plan.exercise.id , class: "img-circle img-responsive img-thumbnail" , width: "100" , height: "100" , alt: "Exercise"}%>
+              <td><strong><%= added_plan.exercise.part %></strong></td>
+              <td><%= added_plan.exercise.name.capitalize %></td>
+              <td>
+                <% case exercise.level %>
+                <% when 0%>
+                    <%= t('other.basic') %>
+                <% when 1%>
+                    <%= t('other.inter') %>
+                <% when 2%>
+                    <%= t('other.diff') %>
+                <% end %>
+              </td>
+              <td><%= added_plan.exercise.equipment.name.capitalize %></td>
+              <td><%= added_plan.exercise.days_per_week %></td>
+              <td><%= form_tag(set_fields_workout_including_path(@workout_plan), :method => 'post',
+                               :id => 'form') do %>
+                  <%= text_field_tag "reps_#{added_plan.exercise.id}"  %></td>
+                  <td><%= text_field_tag "duration_#{added_plan.exercise.id}" %>
+                <% end %></td>
+              <td class="tmp"><%= link_to raw('<button class="btn btn-primary"> <strong> - </strong> </button>'),
+                              added_plan, method: :delete, data: {confirm: 'Are you sure?'} %>
+              </td>
+    </tr>
+        <% end %>
+    </tbody>
+  </table>
+  <button class="btn btn-primary" onclick="$('#form').submit();">Add Exercises</button>

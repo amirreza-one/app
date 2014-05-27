@@ -1,0 +1,22 @@
+<%= form_for(@amount_type) do |f| %>
+  <% if @amount_type.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(@amount_type.errors.count, "error") %>t ('profile.amounterror'):</h4>
+
+      <ul>
+      <% @amount_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label t('profile.name') %><br>
+    <%= f.text_field :name ,:class => 'form-control'%>
+    <br>
+  </div>
+  <div class="actions">
+    <%= f.submit :class => 'btn btn-primary' %>
+  </div>
+<% end %>

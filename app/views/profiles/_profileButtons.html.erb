@@ -1,0 +1,13 @@
+<% unless  @profile.nil? %>
+<div class="btn-group btn-group-lg pull-right">
+  <% unless @iscreate  %>
+      <%=link_to raw("<i class='fa fa-user'></i> #{t 'other.friendreq'}"), request_friendships_path(:request_to_id => @profile.user,profile_id: @profile),remote: true , method: :post , class: 'btn btn-primary'%>
+  <% else %>
+          <%=link_to raw("<i class='fa fa-user'></i> #{t 'other.cancel'}"), request_friendship_path(:id => @request_friendship.id , :profile_id =>params[:profile_id]), method: :delete,remote: true,  class: 'btn btn-primary'%>
+  <% end %>
+
+  <a  data-toggle="modal" data-target="#pm" class="btn btn-info">
+    <i class="fa fa-comment-o"></i>
+  </a>
+</div>
+<% end  %>

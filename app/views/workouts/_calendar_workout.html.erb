@@ -1,0 +1,16 @@
+<h2 id="month" style="direction: ltr">
+  <%= link_to raw('<i class="fa fa-chevron-left"></i>'),{date: @date.prev_month},class: 'btn btn-link',remote: true %>
+  <%= @date.strftime('%B %Y') %>
+  <%= link_to raw('<i class="fa fa-chevron-right"></i>'),{date: @date.next_month},class: 'btn btn-link',remote: true %>
+</h2>
+
+<%= calendar @date do |date| %>
+  <%= date.day %>
+  <% if @workout_by_date[date]  %>
+    <ul>
+      <% @workout_by_date[date].each do |workout| %>
+        <li><%= "#{workout.workout_plan.name}(#{workout.workout_plan.part})   #{workout.total_cal} cal in #{Time.at(workout.total_min).utc.strftime("%M:%S")}" %></li>
+      <% end  %>
+    </ul>
+  <% end  %>
+<% end  %>

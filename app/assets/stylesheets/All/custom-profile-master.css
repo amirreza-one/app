@@ -1,0 +1,163 @@
+
+.main_body {
+    background: rgb(38, 38, 38) url(background.jpg) repeat;
+
+}
+
+
+.navbar.navbar-default {
+    background-image: -webkit-gradient(linear, 0.00% 22.28%, 100.00% 77.72%, color-stop( 0% , rgba(70,72,124,1.00)),color-stop( 17.56% , rgba(75,68,121,1.00)),color-stop( 38.57% , rgba(70,70,122,1.00)),color-stop( 100% , rgba(36,93,136,1.00)),color-stop( 100% , rgba(0,0,0,0.00)));
+    background-image: -webkit-linear-gradient(331deg,rgba(70,72,124,1.00) 0%,rgba(75,68,121,1.00) 17.56%,rgba(70,70,122,1.00) 38.57%,rgba(36,93,136,1.00) 100%,rgba(0,0,0,0.00) 100%);
+    background-image: linear-gradient(119deg,rgba(70,72,124,1.00) 0%,rgba(75,68,121,1.00) 17.56%,rgba(70,70,122,1.00) 38.57%,rgba(36,93,136,1.00) 100%,rgba(0,0,0,0.00) 100%);
+    border-color: rgb(38,38,38);
+    padding-top: 15px;
+    padding-left: 8px;
+}
+.transparent {
+    background-color: rgba(255,255,255,0);
+}
+#khar {
+    color: #FFFFFF;
+    font-style: normal;
+    font-size: xx-large;
+    margin-bottom: 8px;
+    font-weight: 400;
+    font-family: aladin;
+}
+#pr {
+}
+#profileName {
+    background-color: rgba(0,0,0,0.01);
+    color: #FFFFFF;
+}
+.glyphicon.glyphicon-align-justify {
+    color: #FFFFFF;
+}
+.navbar-default     .navbar-toggle .icon-bar{
+    color: #fff;
+    background-color: #fff;
+}
+.glyphicon.glyphicon-chevron-down {
+    color: #FFFFFF;
+}
+.navbar.navbar-default .container-fluid #bs-example-navbar-collapse-1 .nav.navbar-nav.navbar-right .active {
+    background-color: rgba(0,0,0,0.01);
+}
+.navbar.navbar-default .container-fluid #bs-example-navbar-collapse-1 .nav.navbar-nav.navbar-right li a {
+    color: #FFFFFF;
+}
+.brand-font {
+    color: #FFFFFF;
+    font-size: xx-large;
+}
+.navbar.navbar-default .container-fluid #bs-example-navbar-collapse-1 .nav.navbar-nav.navbar-right .dropdown .dropdown-menu li a {
+    background-color: #666666;
+}
+.navbar.navbar-default .container-fluid #bs-example-navbar-collapse-1 .nav.navbar-nav.navbar-right .dropdown .dropdown-menu .divider {
+    background-color: #FFFFFF;
+    color: #333333;
+}
+.navbar.navbar-default .container-fluid #bs-example-navbar-collapse-1 .nav.navbar-nav.navbar-right .dropdown .dropdown-menu {
+    background-color: #666666;
+}
+.mainDiv {
+    width: 90%;
+    background-color: #FFFFFF;
+    margin: 110px 5% 5%;
+    padding: 2% 3%;
+    border-radius: 7px;
+    padding-bottom: 3%;
+}
+.mainDiv #mainCover {
+    border-radius: 7px;
+}
+.mainDiv .row #profilePic {
+    margin-top: -230px;
+}
+.infoDiv ul {
+    list-style: none;
+}
+
+.nav-pills .active a {
+    background-color: rgba(70,70,122,1.00);
+}
+.btn.btn-info {
+    background-color: rgba(0,204,255,1);
+}
+.btn.btn-danger {
+    background-color: #990000;
+}
+
+.mainDiv h1 {
+    color: #000000;
+    font-family: Constantia, "Lucida Bright", "DejaVu Serif", Georgia, serif;
+}
+select.date-select {
+    width:auto;
+    border: 1px solid #cccccc;
+    background-color: #ffffff;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 999px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+.table-responsive {
+    overflow: auto
+}
+video {
+    width: 100%    !important;
+    height: auto   !important;
+}
+
+.fixleft{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 35px;
+    height: 100%;
+    color: #FFFFFF;
+    background-color: #333333;
+    border-color: #333333 #666666 #333333 #333333;
+    border-right-width: 2px;
+    background-image: -webkit-gradient(linear, 50.00% 0.00%, 50.00% 100.00%, color-stop( 0% , rgba(39,39,39,1.00)),color-stop( 100% , rgba(65,65,65,1.00)));
+    background-image: -webkit-linear-gradient(270deg,rgba(39,39,39,1.00) 0%,rgba(65,65,65,1.00) 100%);
+    background-image: linear-gradient(180deg,rgba(39,39,39,1.00) 0%,rgba(65,65,65,1.00) 100%);
+    text-align: center;
+    padding-right: 3px;
+    padding-left: 3px;
+}
+.alert.alert-success {
+    background-color: rgb(0, 137, 73);
+    border-color: rgba(0,51,0,1);
+    color: #ffffff;
+}
+.alert.alert-info{
+    background-color: rgba(41,105,168,1);
+    border-color: rgba(12,32,51,1);
+    color: #FFFFFF;
+}
+.alert.alert-danger{
+    background-color: rgb(140, 25, 70);
+    border-color: rgba(128,38,78,1);
+    color: #FFFFFF;
+}
+.alert.alert-warning{
+    background-color: rgba(75,75,149,1);
+    border-color: rgba(51,51,51,1);
+    color: #FFFFFF;
+}

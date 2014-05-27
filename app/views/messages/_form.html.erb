@@ -1,0 +1,24 @@
+<%= form_for(@message, :url => messages_path) do |f| %>
+    <% if @message.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
+
+          <ul>
+            <% @message.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <%= f.hidden_field :to_id , value: @to_param%>
+    <div class="row">
+      <div class="form-group col-xs-offset-1 col-xs-10 col-sm-12 col-sm-offset-0">
+        <%= f.label :content , "Message" , :class => 'control-label'%>
+        <%= f.text_area :content ,:class => 'form-control ',rows: "8", :placeholder => 'Content Of Message'%>
+      </div>
+    </div>
+    <br>
+    <div class="actions">
+      <%= f.submit  "Send Message" , :class => 'btn btn-primary' %>
+    </div>
+<% end %>

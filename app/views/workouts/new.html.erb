@@ -1,0 +1,84 @@
+<!%= javascript_include_tag "js/main" , 'js/lang-css' , 'prettify' , 'run_prettify' %>
+<!%= stylesheet_link_tag '3d-corner-ribbons' , 'example' %>
+<h1><%=t 'other.new_workout' %></h1>
+<style>
+
+    .btn1{
+        border:1px solid #ffc826; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:12px;font-family:arial, helvetica, sans-serif; padding: 10px 10px 10px 10px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
+        background-color: #ffd65e; background-image: -webkit-gradient(linear, left top, left bottom, from(#ffd65e), to(#febf04));
+        background-image: -webkit-linear-gradient(top, #ffd65e, #febf04);
+        background-image: -moz-linear-gradient(top, #ffd65e, #febf04);
+        background-image: -ms-linear-gradient(top, #ffd65e, #febf04);
+        background-image: -o-linear-gradient(top, #ffd65e, #febf04);
+        background-image: linear-gradient(to bottom, #ffd65e, #febf04);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffd65e, endColorstr=#febf04);
+    }
+
+    .btn1:hover{
+        border:1px solid #f7b800;
+        background-color: #ffc92b; background-image: -webkit-gradient(linear, left top, left bottom, from(#ffc92b), to(#ce9a01));
+        background-image: -webkit-linear-gradient(top, #ffc92b, #ce9a01);
+        background-image: -moz-linear-gradient(top, #ffc92b, #ce9a01);
+        background-image: -ms-linear-gradient(top, #ffc92b, #ce9a01);
+        background-image: -o-linear-gradient(top, #ffc92b, #ce9a01);
+        background-image: linear-gradient(to bottom, #ffc92b, #ce9a01);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffc92b, endColorstr=#ce9a01);
+    }
+
+
+    .btn2{
+        border:1px solid #25729a; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:12px;font-family:arial, helvetica, sans-serif; padding: 10px 10px 10px 10px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
+        background-color: #3093c7; background-image: -webkit-gradient(linear, left top, left bottom, from(#3093c7), to(#1c5a85));
+        background-image: -webkit-linear-gradient(top, #3093c7, #1c5a85);
+        background-image: -moz-linear-gradient(top, #3093c7, #1c5a85);
+        background-image: -ms-linear-gradient(top, #3093c7, #1c5a85);
+        background-image: -o-linear-gradient(top, #3093c7, #1c5a85);
+        background-image: linear-gradient(to bottom, #3093c7, #1c5a85);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#3093c7, endColorstr=#1c5a85);
+    }
+
+    .btn2:hover{
+        border:1px solid #1c5675;
+        background-color: #26759e; background-image: -webkit-gradient(linear, left top, left bottom, from(#26759e), to(#133d5b));
+        background-image: -webkit-linear-gradient(top, #26759e, #133d5b);
+        background-image: -moz-linear-gradient(top, #26759e, #133d5b);
+        background-image: -ms-linear-gradient(top, #26759e, #133d5b);
+        background-image: -o-linear-gradient(top, #26759e, #133d5b);
+        background-image: linear-gradient(to bottom, #26759e, #133d5b);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#26759e, endColorstr=#133d5b);
+    }
+</style>
+
+
+<br>
+
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th><%= t('other.name') %></th>
+      <th><%= t('other.part') %></th>
+      <th><%= t('other.level') %></th>
+      <th></th>
+      <th></th>
+      <th></th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @plans.each do |plan| %>
+        <tr >
+          <td>
+            <strong><%= plan.name %></strong></td>
+          <td><%= plan.part %></td>
+          <td><%= plan.difficulty %></td>
+          <td></td>
+          <td></td>
+          <td><%= link_to "#{plan.mode!='Free' ?"#{t('other.premium')}": "#{t('other.sstart')}" }".html_safe, workouts_path(:plan_id =>  plan.id), :method => :post, :data => { :confirm => 'Are You Ready Now?' } , class: "#{plan.mode!='Free' ?'btn1':'btn2'} pull-right" %></td>
+                </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<%= will_paginate @plans, renderer: BootstrapPagination::Rails %>
+
+<%= link_to 'Back', workouts_path %>

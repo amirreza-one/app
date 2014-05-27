@@ -1,0 +1,284 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag  'application','pnotify.custom.min', media: 'all', 'data-turbolinks-track' => true %>
+  <% if I18n.locale == :fa  %>
+      <%=stylesheet_link_tag 'bootstrap-rtl/bootstrap-rtl.min','bootstrap-rtl/rtl' %>
+  <% end  %>
+  <%= javascript_include_tag 'application','hammer','pnotify.custom.min','partial/search_layout','SideNavigation/modernizr.custom', 'data-turbolinks-track','droparea' => true %>
+  <%= javascript_include_tag 'Video Gallery/html5gallery' , 'Flipclock/base' , 'Flipclock/flipclock' , 'Flipclock/hourlycounter' , 'Flipclock/minutecounter' %>
+  <%= stylesheet_link_tag 'Flipclock/flipclock','SideNavigation/icons','SideNavigation/normalize' , media: 'all' %>
+
+  <title>Profile . Virtual GYM</title>
+  <script>var __adobewebfontsappname__="dreamweaver"</script>
+  <%= csrf_meta_tag %>
+  <script type="text/javascript">
+      $(document).swipe({
+          swipeRight:function(event, direction, distance, duration, fingerCount) {
+              $('#sideNav').click();
+          }
+
+      });
+
+
+
+
+  </script>
+</head>
+
+<body style="background-color: #2e2e2e"  >
+<style>
+    .rightMenu {
+        position:relative;
+        float:right;
+    }
+    .right-caret {
+
+        border-bottom: 4px solid transparent;
+        border-top: 4px solid transparent;
+        border-left: 4px solid #000000;
+        display: inline-block;
+        height: 0;
+        opacity: 1;
+        vertical-align: top;
+        width: 0;
+
+    }
+    .right
+    {
+        float:right;
+    }
+</style>
+<div id="st-container" class="st-container">
+
+
+
+
+  <nav class="st-menu st-effect-12" id="menu-12">
+    <h2  style="color:
+            #FFF"><i class="fa fa-tasks"></i> <%= t 'other.menu' %></h2>
+    <ul>
+      <%unless current_user.profile.nil?%>
+
+          <li><%= link_to  raw("<i class='fa fa-home fa-2x'></i> #{ t('other.home')}") , controller: "profiles", action: "show", id: current_user.profile_id %></li>
+          <li><%= link_to  raw("<i class='fa fa-envelope fa-2x'></i> #{t('other.inbox') } <span class='badge'>#{@inbox}</span>") ,  :controller => 'messages' , :action => 'inbox' %></li>
+          <li><%= link_to  raw("<i class='fa fa-trophy fa-2x'></i> #{t('other.workouts')}") , workouts_path %></li>
+          <li><%= link_to  raw("<i class='fa fa-group fa-2x'></i> #{t('other.friends')} <span class='badge'>#{@request_count}</span>") , profiles_index_friend_path , remote:true %></li>
+          <li><%= link_to  raw("<i class='fa fa-signal fa-2x'></i> #{t('other.chart')}") , controller: 'charts' , action: 'index' %></li>
+          <li><%= link_to  raw("<i class='fa fa-tachometer fa-2x'></i> #{t('other.challenges')}") , challenges_path , remote:true %></li>
+          <li><%= link_to  raw("<i class='fa fa-cutlery fa-2x'></i> #{t('other.nutrition')}") , "#" %></li>
+      <% end %>
+    </ul>
+  </nav>
+
+
+
+<!-- content push wrapper -->
+<div class="st-pusher">
+
+
+  <div class="st-content main_body" ><!-- this is the wrapper for the content -->
+    <div class="st-content-inner"><!-- extra div for emulating position:fixed of the menu -->
+      <!-- Top Navigation -->
+      <div class="codrops-top clearfix">
+<!-- /Added 1 -->
+
+
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a id="khar" class="navbar-brand brand-font" href="#"><span class="glyphicon glyphicon-record">  </span>  <%= t 'other.virtualgym' %></a>
+    </div>
+
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+      <ul class="nav navbar-nav navbar-<%= t 'other.right' %>">
+        <!-- SEARCHBOX -->
+
+        <li id="search_box">
+          <section class="main">
+            <%= form_tag  profiles_path,remote: true,method: 'get' , class: 'search',id: 'body_search' do %>
+                  <%= text_field_tag :search_layout, params[:search_layout] ,:class => 'form-control ' ,placeholder: "#{t 'other.search'}...",'autocomplete' => 'off', id: 'search_input' %>
+                <ul class="results" id="results">
+
+                </ul>
+                </p>
+            <% end %>
+          </section>
+        </li>
+
+        <!-- SEARCHBOX -->
+
+
+        <!-- Admin Part -->
+        <li class="dropdown">
+          <% unless current_user.profile_id.nil? %>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white"><span class="glyphicon glyphicon-eye-open">  </span> <%= t 'other.admin' %></a>
+              <ul class="dropdown-menu">
+                <% if current_user.role? :admin  %>
+                    <li><%= link_to t('other.users') , controller: "profiles", action: "index"%></li>
+                <% end  %>
+                <li><%= link_to t('other.workoutplan') , controller: "workout_plans", action: "index"%></li>
+                <li><%= link_to t('other.exercise') , controller: "exercises", action: "index"%></li>
+                <li><%= link_to t('other.equipment') , controller: "equipment", action: "index"%></li>
+          </ul>
+          <% end %>
+        </li>
+
+        <!-- end Admin Part -->
+
+        <% unless current_user.profile_id.nil? %>
+        <li > <%= link_to raw("<span class='glyphicon glyphicon-user'></span> #{current_user.profile.firstname.capitalize} "), {controller: "profiles", action: "show", id: current_user.profile_id }, {:style => 'color: white'}%></li>
+        <% end %>
+        <li class="dropdown">
+          <% unless current_user.profile_id.nil? %>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down">  </span></a>
+          <ul class="dropdown-menu <%= t 'other.menuright' %>">
+            <li><a href="#"><span class="glyphicon glyphicon-tower">  </span>  <%= t 'other.becomepro' %></a></li>
+            <li><%= link_to raw("<span class='glyphicon glyphicon-pencil'></span> #{t 'other.editprofile'}") , controller: "profiles", action: "edit", id: current_user.profile_id  %></li>
+            <li><%= link_to raw("<span class='glyphicon glyphicon-glyphicon glyphicon-cog'></span> #{t 'other.editaccount'}") , edit_user_registration_path(:x => 'y')  %></li>
+            <li class="divider"></li>
+          <% end %>
+            <li><%= link_to raw("<span class='glyphicon glyphicon-off'>  </span>  #{t 'other.logout'}"), destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+          </ul>
+        </li>
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+      </div>
+
+      <div class="main clearfix main_body">
+
+<!-- END OF NAVBAR -->
+<div class="mainDiv">
+
+<%= yield %>
+
+</div>
+        <div id="allPicForFriend">
+        <% unless @profile.nil? || (action_name!='show'|| @photos.size==0 ) %>
+            <% if !@friendship.nil?  || @profile.id ==current_user.profile_id  %>
+                  <div class="mainDiv "  style="background-color: rgba(255,255,255,0.1); margin-top: -4.5%; margin-bottom: 5%; padding-top: 10px;">
+                    <div class="row" id="photo_events">
+                        <%= render 'photo_events' %>
+                    </div>
+                    <%= will_paginate @photos %>
+
+                  </div>
+            <% end  %>
+         <% end%>
+         </div>
+
+
+        <div id="st-trigger-effects" class="column">
+          <% unless current_user.profile.nil? %>
+            <button id="sideNav" class="fixleft hidden-xs" data-effect="st-effect-12" ><i class='fa fa-th-list fa-2x'></i></button>
+          <%end%>
+        </div>
+
+
+
+      </div><!-- /main -->
+    </div><!-- /st-content-inner -->
+  </div><!-- /st-content -->
+</div><!-- /st-pusher -->
+</div><!-- /st-container -->
+
+
+<div class="modal fade" id="pm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><%= t 'other.message' %></h4>
+      </div>
+      <div class="modal-body">
+        <% unless @message.nil? || @profile.nil? %>
+        <%= form_for(@message,remote: true,id:'private_message_form') do |f| %>
+            <% if @message.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
+
+                  <ul>
+                    <% @message.errors.full_messages.each do |msg| %>
+                        <li><%= msg %></li>
+                    <% end %>
+                  </ul>
+                </div>
+            <% end %>
+            <%= f.hidden_field :to_id , value: @profile.user.id%>
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-10 col-sm-12 col-sm-offset-0">
+                <%= f.text_area :content ,:class => 'form-control ',rows: "8", :placeholder => "#{t 'other.contentmessage'}"%>
+              </div>
+            </div>
+            <br>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'other.close'  %></button>
+              <%= f.submit  t('other.send') , :class => 'btn btn-primary' %>
+            </div>
+        <% end %>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Friend Modal -->
+<%= render :partial => 'layouts/friend_modal' %>
+<!-- Friend Modal -->
+<!-- Challenge Modal -->
+<%= render 'challenges/challenge_modal' %>
+<!-- /Challenge Modal -->
+
+<% @isWorkoutShow||= false %>
+<% if @isWorkoutShow == true %>
+    <% @isWorkoutShow = true %>
+    <!-- Calory Modal -->
+    <div class="modal fade" id="caloryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="FriendModalLabel"><%= t 'other.enter_heart_rate' %></h4>
+          </div>
+          <%= form_tag({:controller => 'workouts', :action =>'finish_workout'},:method => :get)  %>
+          <div class="modal-body" id="caloryModalDiv">
+            <div class="form-group">
+              <%= hidden_field_tag :a_level %>
+              <%= hidden_field_tag :a_id %>
+              <%= hidden_field_tag :a_time %>
+              <%= text_field_tag :heart ,nil, :class => 'form-control' , 'placeholder'=>"#{t('other.heart_rate_place')}" %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <%= submit_tag t('other.finish'),:class => 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Calory Modal -->
+<%end%>
+
+
+
+
+<%= javascript_include_tag 'SideNavigation/classie','SideNavigation/sidebarEffects' %>
+</body>
+</html>

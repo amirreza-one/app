@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  type: 
+  description: MyText
+  description_fa: MyText
+  level: 1
+  equipment_id: 
+  days_per_week: 1
+
+two:
+  name: MyString
+  type: 
+  description: MyText
+  description_fa: MyText
+  level: 1
+  equipment_id: 
+  days_per_week: 1

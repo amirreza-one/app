@@ -1,0 +1,13 @@
+$(function(){
+    new PNotify({
+        title: '<%= t 'other.done' %>',
+        text: '<%= notice %>',
+        type: 'error',
+        styling: 'fontawesome',
+        icon: 'fa fa-user',
+        hide: true
+    });
+});
+$('#profileButtons').html('<%= escape_javascript(render 'request_friendships/add_request') %>')
+<%= flash[:notice]="" %>
+$('#modalRequestDiv').html("<%= escape_javascript(render 'profiles/requests') %>");

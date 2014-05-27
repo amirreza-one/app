@@ -1,0 +1,31 @@
+<h1>t('profile.listamount')</h1><br>
+<%= link_to raw('<span class="glyphicon glyphicon-plus"></span> New'), new_amount_type_path ,:class => "btn btn-info"%><br><br>
+
+
+<div class="table-responsive">
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @amount_types.each do |amount_type| %>
+      <tr>
+        <td><%= amount_type.name %></td>
+        <td><%= link_to raw('<span class="glyphicon glyphicon-list-alt"></span> Show'), amount_type %></td>
+        <td><%= link_to raw('<span class="glyphicon glyphicon-pencil"></span> Edit'), edit_amount_type_path(amount_type) %></td>
+        <td><%= link_to raw('<span class="glyphicon glyphicon-remove"></span> Destroy'), amount_type, method: :delete, data: { confirm: t('profile.removequest') } %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<br>
+
+

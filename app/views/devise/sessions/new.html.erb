@@ -1,0 +1,56 @@
+
+<div class="heading">
+  <h2>Welcome Back!</h2>
+  <h3>Log in to your Virtual GYM dashboard.</h3>
+</div>
+<div class="square-gradient-bar">
+  <div class="bar left one"></div>
+  <div class="bar two"></div>
+  <div class="bar three"></div>
+  <div class="bar four"></div>
+  <div class="bar five"></div>
+  <div class="bar right six"></div>
+</div>
+<div class="well-big square-top">
+  <% if notice %>
+      <p class="alert alert-notice"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+      <p class="alert alert-error"><%= alert %></p>
+      <% end %>
+  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
+    <div class="field">
+        <%= f.email_field :email, :autofocus => true ,:placeholder => "Email" ,:autofocus => false %>
+    </div>
+
+    <div class="field">
+        <%= f.password_field :password , :placeholder => "Password" ,:autofocus => false%>
+    </div>
+
+      <% if devise_mapping.rememberable? -%>
+        <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div><br>
+      <% end -%>
+    <div class="row">
+      <div class="col-6 col-lg-6 col-sm-12">
+        <%= f.submit "Lets Go" , :class => "button"%>
+      </div>
+      <div class="col-6 col-lg-6 col-sm-12">
+        <div class="note">
+          <div class="title">Having trouble logging in? </div>
+          <%= link_to "Reset my password", new_password_path(resource_name) %>
+        </div>
+      </div>
+    </div>
+
+
+<% end %>
+
+<%= render "devise/shared/links" %>
+
+</div>
+<div class="footnote">
+  <h3>Don't have an account?
+    <%= link_to "Sign up!", new_registration_path(resource_name) , :class => "redirect"%>
+  </h3>
+</div>

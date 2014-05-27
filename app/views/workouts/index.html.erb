@@ -1,0 +1,11 @@
+<% @new_workout_plan = true %>
+<div class="row">
+<div style="width: 100%"> <%= link_to raw("#{t('other.start')}"), new_workout_path ,:class => "btn btn-danger btn-lg" , style: 'color: white; align: center;'%><br><br>
+</div>
+  </div>
+<div id="workout" style="overflow: auto;">
+  <%= render :partial => 'calendar_workout' %>
+</div>
+
+
+

@@ -1,0 +1,34 @@
+
+
+
+<div class="row">
+  <div class="col-md-3 col-sm-3">
+    <ul class="nav nav-pills nav-stacked">
+      <li class="active"><%= link_to raw("Inbox <span class='badge pull-right'>#{@inbox}</span>") , :controller => 'messages' , :action => 'inbox' %></li>
+      <li><%= link_to 'Sent' , :controller => 'messages' , :action => 'sent' %></li>
+    </ul>
+  </div>
+  <div class="col-md-9 col-sm-9">
+    <p id="notice"><%= notice %></p>
+
+    <div class="page-header">
+      <h1>Messages
+        <br>
+        <small>
+          From : <%= @message.from.email %><br>To : <%= @message.to.email %><br>
+
+        </small>
+      </h1>
+    </div>
+    <br>
+
+    <div class="panel panel-default">
+
+      <div class="panel-body" style="min-height: 300px">
+        <%= @message.content %>
+      </div>
+    </div>
+    <br>
+  </div>
+
+</div>

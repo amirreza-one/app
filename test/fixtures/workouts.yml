@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  workout_plan_id: 
+  date: 2014-03-10
+  total_min: 2014-03-10 18:36:32
+  total_cal: 1
+
+two:
+  user_id: 
+  workout_plan_id: 
+  date: 2014-03-10
+  total_min: 2014-03-10 18:36:32
+  total_cal: 1

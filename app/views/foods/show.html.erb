@@ -1,0 +1,43 @@
+<% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %>">
+      <%= value %>
+    </div>
+<% end %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @food.name %>
+</p>
+
+<p>
+  <strong>Calory:</strong>
+  <%= @food.calory %>
+</p>
+
+<p>
+  <strong>Protein:</strong>
+  <%= @food.protein %>
+</p>
+
+<p>
+  <strong>Carbohydrate:</strong>
+  <%= @food.carbohydrate %>
+</p>
+
+<p>
+  <strong>Fat:</strong>
+  <%= @food.fat %>
+</p>
+
+<p>
+  <strong>Amount type:</strong>
+  <%= @food.amount_type.name %>
+</p>
+
+<p>
+  <strong>Per:</strong>
+  <%= @food.per %>
+</p>
+
+<%= link_to 'Edit', edit_food_path(@food) %> |
+<%= link_to 'Back', foods_path %>

@@ -1,0 +1,21 @@
+<tr id="row_<%= partial_exercises.id %>">
+    <td><%= image_tag partial_exercises.avatar.url(:thumb) ,{id: partial_exercises.id , class: "img-circle img-responsive img-thumbnail" , width: "100" , height: "100" , alt: "Exercise"}%></td>
+    <td><strong><%= partial_exercises.part %></strong></td>
+    <td><%= partial_exercises.name.capitalize %></td>
+    <td>
+        <% case partial_exercises.level %>
+        <% when 0%>
+            <%= t('other.basic') %>
+        <% when 1%>
+            <%= t('other.inter') %>
+        <% when 2%>
+            <%= t('other.diff') %>
+        <% end %></td>
+    <td><%= partial_exercises.equipment.name.capitalize %></td>
+    <td><%= partial_exercises.days_per_week %></td>
+    <td><%= text_field_tag "reps_#{partial_exercises.id}"  %></td>
+    <td><%= text_field_tag "duration_#{partial_exercises.id}" %></td>
+    <td><%= link_to raw('<button class="btn btn-primary"> <strong> - </strong> </button>'),
+           workout_including_path(:id => workout_including.id, :workout_plan_id => workout_id), method: :delete, data: {confirm: 'Are you sure?'}, remote: true %>
+        </td>
+</tr>

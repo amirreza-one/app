@@ -1,0 +1,9 @@
+
+    <% @messages.each do |message| %>
+        <tr class="<%=  message.status == 0 ? 'info' : ''%>">
+          <td><%= message.created_at.strftime("%B %d, %Y") %></td>
+          <td><%= message.from.email %></td>
+          <td><%= link_to truncate(message.content,:length => 50 , :ommision => "...") ,message , class: 'btn btn-link' %></td>
+          <td><%= link_to raw('<span class="glyphicon glyphicon-trash"></span>'), message, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-link'  %></td>
+        </tr>
+    <% end %>

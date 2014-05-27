@@ -1,0 +1,38 @@
+<div class="modal fade" id="friendModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="FriendModalLabel"><%= t 'other.friends' %></h4>
+      </div>
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#friended" data-toggle="tab"><%= t 'other.friends' %></a></li>
+        <li><a href="#request" data-toggle="tab"><%= t 'other.request' %><span class='badge'><%= @request_count %></span></a></li>
+      </ul>
+
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane active" id="friended">
+          <div class="modal-body" id="modalFriendDiv" style="overflow: auto; max-height: 500px;">
+            ...
+          </div>
+        </div>
+        <div class="tab-pane" id="request">
+          <div class="modal-body" id="modalRequestDiv" style="overflow: auto; max-height: 500px;">
+
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'other.close' %></button>
+
+      </div>
+    </div>
+  </div>
+</div>

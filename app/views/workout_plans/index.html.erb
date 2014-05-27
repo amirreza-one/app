@@ -1,0 +1,28 @@
+<h1><%= t('other.listplan') %></h1>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th><%= t('other.name') %></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @workout_plans.each do |workout_plan| %>
+          <tr>
+            <td><%= workout_plan.name %></td>
+            <td><%= link_to t('other.show'), workout_plan %></td>
+            <td><%= link_to t('other.edit'), edit_workout_plan_path(workout_plan) %></td>
+            <td><%= link_to t('other.remove'), workout_plan, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+<br>
+
+<%= link_to t('other.newplan'), new_workout_plan_path %>

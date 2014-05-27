@@ -1,0 +1,20 @@
+<div class="col-md-3 col-sm-3  col-xs-12 infoDiv visible-xs">
+  <h3> <%= "#{@profile.firstname} #{@profile.lastname}" %> </h3>
+  <ul>
+    <li><span class="glyphicon glyphicon-star">  </span> <%= label_tag t('other.age').html_safe %>: <%= age(@profile.birthdate) %></li>
+    <li><span class="glyphicon glyphicon-star">  </span> <%= label_tag t('other.height').html_safe %>: <%= @profile.height %> <%= t 'other.cm' %></li>
+    <li><span class="glyphicon glyphicon-star">  </span> <%= label_tag t('other.weight').html_safe %>: <%= @profile.weight %> <%= t 'other.kg' %></li>
+    <li><span class="glyphicon glyphicon-star">  </span> <%= label_tag t('other.gender').html_safe %>: <%= @profile.gender==1?"#{t 'other.male'}":"#{t 'other.female'}" %></li>
+    <li><span class="glyphicon glyphicon-star">  </span> <%= label_tag t('other.country').html_safe %>: <%= @profile.country.capitalize %></li>
+    <li><span class="glyphicon glyphicon-star">  </span> <%= label_tag t('other.city').html_safe %>: <%= @profile.city.capitalize %></li>
+  </ul>
+</div>
+<div class="col-md-offset-1 col-md-3  col-sm-4 col-xs-12 infoDiv visible-xs">
+  <h3>Total</h3>
+  <ul>
+    <li><span class="glyphicon glyphicon-fire">  </span> <%= label_tag t('activemodel.activerecord.attributes.profile.totalcal').html_safe %>: <%= number_with_delimiter(@optionsProfile[1]) %></li>
+    <li><span class="glyphicon glyphicon-dashboard">  </span> <%= label_tag t('activemodel.activerecord.attributes.profile.totalTime').html_safe %>: <%= Time.at(@optionsProfile[0]).utc.strftime("%H:%M:%S") %></li>
+    <li><span class="glyphicon glyphicon-stats">  </span> <%= label_tag t('activemodel.activerecord.attributes.profile.level').html_safe %>: easy</li>
+    <li><span class="glyphicon glyphicon-picture">  </span> <%= label_tag t('activemodel.activerecord.attributes.profile.photos').html_safe %>: <%= @photos.count %></li>
+  </ul>
+</div>

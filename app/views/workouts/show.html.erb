@@ -1,0 +1,239 @@
+<% @isWorkoutShow = true  %>
+
+<script type="text/javascript">
+    var description = [];
+    var time = [];
+    var reps = [];
+    var names = [];
+    var totalExerciseTime = 0 ;
+    <% @exercises.each do |exercise| %>
+    <% if I18n.locale == :en %>
+    description.push('<%= exercise.exercise.description.gsub("\n", "\\n").gsub("\r", "\\r").gsub("\t", "\\t").gsub("'","\\'") %>');
+    <% else  %>
+    description.push('<%= exercise.exercise.description_fa.gsub("\n", "\\n").gsub("\r", "\\r").gsub("\t", "\\t").gsub("'","\\'") %>');
+    <% end  %>
+    var temp = <%= exercise.duration %> ;
+    time.push(temp);
+    reps.push(<%= exercise.reps %>);
+    names.push('<%= exercise.exercise.name %>');
+    totalExerciseTime += temp;
+    <% end %>
+
+</script>
+<script type="text/javascript">
+    var clock;
+    var ex = 0;
+    var rest = false;
+    var pause = false;
+    var difficulty = 9;
+    $(document).ready(function() {
+
+        var clock;
+        var tillNow = 0;
+        $("#description").html(description[ex]);
+        $('#description_head').html('<%= "#{t('other.dis_for')}".html_safe %>'+names[ex]);
+        new PNotify({
+            title: '<%= t('other.welcome') %>',
+            text: '<%= t('other.fitness_start') %>',
+            type: 'notice',
+            styling: 'fontawesome',
+            icon: 'fa fa-heart-o',
+            hide: true ,
+            delay: 10000
+
+        });
+
+
+        clock = $('.clock').FlipClock(time[ex], {
+            clockFace: 'MinuteCounter',
+            countdown: true,
+            autoStart: false,
+            callbacks: {
+                stop: function() {
+                    if(!rest && !pause){
+                        rest = true;
+                        tillNow +=time[ex];
+                        var percent = ((tillNow*100)/totalExerciseTime).toFixed();
+                        $('#progressID').html(percent+'% Complete');
+                        $('#progressID').attr('aria-valuenow',percent);
+                        $('#progressID').attr('style','width: '+percent+'%');
+                        ex++;
+                        if(time[ex]!=null)
+                            clock.setTime(time[ex]);
+                        else{
+                            new PNotify({
+                                title: '<%= t('other.good_job') %>',
+                                text: '<%= t('other.difquest') %>',
+                                icon: 'fa fa-spinner',
+                                type: 'info',
+                                hide: false,
+                                confirm: {
+                                    confirm: true,
+                                    buttons: [{
+                                        text: '<%= t('other.low') %>',
+                                        addClass: 'btn-primary',
+                                        click: function(notice) {
+                                            difficulty = 1;
+                                            $('#caloryModal').modal('show');
+                                            $('#a_level').attr('value',difficulty);
+                                            $('#a_time').attr('value',tillNow);
+                                            $('#a_id').attr('value',<%= params[:id] %>);
+
+                                        }
+                                    }, {
+                                        text: '<%= t('other.medium') %>',
+                                        addClass: 'btn-primary',
+                                        click: function(notice) {
+                                            difficulty =2 ;
+                                            $('#caloryModal').modal('show');
+                                            $('#a_level').attr('value',difficulty);
+                                            $('#a_time').attr('value',tillNow);
+                                            $('#a_id').attr('value',<%= params[:id] %>);
+                                        }
+                                    }, {
+                                        text: '<%= t('other.high') %>',
+                                        addClass: 'btn-primary',
+                                        click: function(notice) {
+                                            difficulty = 3;
+                                            $('#caloryModal').modal('show');
+                                            $('#a_level').attr('value',difficulty);
+                                            $('#a_time').attr('value',tillNow);
+                                            $('#a_id').attr('value',<%= params[:id] %>);
+                                        }
+                                    }]
+                                },
+                                buttons: {
+                                    closer: false,
+                                    sticker: false
+                                },
+                                history: {
+                                    history: false
+                                }
+                            });
+
+                        }
+                        $(".html5gallery-right-0").click();
+                        clock.start();
+                    }else if(rest && !pause){
+                        rest = false;
+                        clock.setTime(3);
+                    }
+
+                },
+                start: function() {
+
+                    if(!rest ){
+                        var temp= " <%= t('other.do') %> " + names[ex] +" <%= t('other.for') %> <strong>"+reps[ex]+"</strong> <%= t('other.times') %>";
+                        new PNotify({
+                            title: '<%= t 'other.well' %>',
+                            text: temp,
+                            type: 'info',
+                            styling: 'fontawesome',
+                            icon: 'fa fa-fire',
+                            hide: true ,
+                            delay: time[ex]*1000
+
+                        });
+                        $('#description_head').html('<%= "#{t('other.dis_for')}".html_safe %>'+names[ex]);
+                        $("#description").html(description[ex]);
+                    }else{
+
+                        var temp="<%= t 'other.dis_rest_1' %> <strong>"+names[ex]+"</strong> <%= "#{t('other.dis_rest_2')}".html_safe %>";
+                        new PNotify({
+                            title: '<%= t 'other.rest' %>',
+                            text: temp,
+                            type: 'error',
+                            styling: 'fontawesome',
+                            icon: 'fa fa-coffee',
+                            hide: true ,
+                            delay: 10000
+
+                        });
+
+                        $('#description_head').html('<%= "#{t('other.dis_for')}".html_safe %>'+names[ex]);
+                        $("#description").html(description[ex]);
+                    }
+                },
+                reset: function() {
+                    $('.message').html('The clock has reset!');
+                }
+            }
+
+        });
+
+        $(document).on('click','#stop', function () {
+            pause = true;
+            clock.stop();
+
+        });
+        $(document).on('click','#start', function () {
+            pause = false;
+            clock.start();
+        });
+        $(document).on('click','#next', function () {
+            clock.stop();
+            clock.setTime(90);
+        });
+
+
+
+
+
+
+    });
+
+</script>
+
+<div class="row">
+  <div class="progress progress-striped active">
+    <div id="progressID" class="progress-bar progress-bar-info"  role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+      0% Complete
+    </div>
+  </div>
+
+  <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="well" >
+      <div class="row">
+      <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12 ">
+
+      <div class="clock " style="margin:1%; min-width: 300px"></div>
+      <div class="btn-group btn-group-justified">
+        <a href="#" id="start" class="btn btn-primary" style="color: #ffffff; width: 33.3%"><%= t 'other.start_button' %></a>
+        <a href="#" id="stop" class="btn btn-info" style="color: #ffffff; width: 33.3%"><%= t 'other.stop_button' %></a>
+        <a href="#" id="next" class="btn btn-primary" style="color: #ffffff; width: 33.3%"><%= t 'other.next_button' %></a>
+      </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading" id="description_head">
+        <strong>Discriptions</strong>
+
+
+      </div>
+      <div class="panel-body" id="description" style="min-height: 320px">
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6  col-sm-6  col-xs-12">
+    <div style="display:none;" class="html5gallery" data-responsive="true" data-skin="showcase" data-width="480" data-height="272">
+      <!-- Add videos to Gallery -->
+      <% @exercises.each do |exercise| %>
+      <%= link_to (image_tag exercise.exercise.avatar.url(:thumb) , alt: exercise.exercise.name), exercise.exercise.video_url%>
+      <%end%>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+

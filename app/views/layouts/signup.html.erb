@@ -1,0 +1,144 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Virtual GYM</title>
+  <%= stylesheet_link_tag    "application", 'custom-login',  media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application"%>
+  <!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
+  <script>var __adobewebfontsappname__="dreamweaver"</script>
+  <%= javascript_include_tag :all %>
+  <%= csrf_meta_tag %>
+</head>
+
+<body>
+<% if notice %>
+<script type="text/javascript">
+    $(function(){
+        new PNotify({
+            title: 'Notice',
+            text: '<%= notice %>',
+            type: 'info',
+            styling: 'fontawesome',
+            icon: 'fa fa-info'
+        });
+    });
+</script>
+<% end %>
+<% if alert %>
+    <script type="text/javascript">
+        $(function(){
+            new PNotify({
+                title: 'Done',
+                text: '<%= alert %>',
+                type: 'error',
+                styling: 'fontawesome',
+                icon: 'fa fa-exclamation'
+            });
+        });
+    </script>
+<% end %>
+<p>&nbsp;</p>
+<header>
+  <div class="row">
+    <div class="col-md-4 col-sm-5">
+      <h1 style="font-family: aladin; font-style: normal; font-weight: 400;"><span class="glyphicon glyphicon-record"></span> Virtual GYM </h1>
+    </div>
+    <div class="col-md-offset-4 col-md-4 col-sm-offset-2 col-sm-5  col-xs-offset-1 col-xs-12">
+      <form class="form-inline" role="form">
+        <div class="row">
+          <div class="form-group" style="color: #ffffff">
+            Do you have account right now?
+            <%= link_to 'Login', new_session_path(resource_name) ,:class => 'btn btn-default btn-login' , :style => 'color: rgb(38,38,38);border-radius: 2px;'%>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="container ">
+    <div class="fuzzy-background">
+      <div class="span span-1"></div>
+      <div class="span span-2"></div>
+      <div class="span span-3"></div>
+      <div class="span span-4"></div>
+      <span style="font-family: aladin;font-style: normal;font-weight: 400;"></span>
+      <div class="span span-5"></div>
+    </div>
+    <div class="header-underline"></div>
+  </div>
+</header>
+<style>
+    .info_div{
+        background-color: rgba(255,255,255,0.05);
+        border-color: rgb(38,38,38);
+        color: #bababa;
+    }
+    .storesLink{
+        color: #00b8f1;
+        font-style: italic;
+    }
+    .storesLink:hover{
+        color: #2682d4;
+        font-style: italic;
+        background-color: transparent;
+    }
+</style>
+<p>&nbsp;</p>
+<div class="info_div row" style='margin-top: 10px; margin-left: 20px; margin-right: 20px; text-align: center; background-color: rgba(255,255,255,0.05);'  >
+  <div class="col-md-4" style="text-align: left;">
+    <h1>
+      <br>
+      We bring you the opportunity to have your own personal gym in your smartphone or computer !
+    </h1>
+  </div>
+  <div class="col-md-8">
+    <%= image_tag '/images/device.png', :class => 'img-responsive' , :width => '700'  %>
+  </div>
+</div>
+
+<div id = "saina" >
+  <h2>Sign up for free <strong>Now</strong></h2><br>
+
+
+  <%= yield %>
+
+
+    <br><br><br><br>
+</div>
+
+<div class="row" style="margin-top: 20px; margin-left: 5px; margin-right: 5px; text-align: center;">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail info_div" >
+      <h1><i class="fa fa-heart-o fa-5x"></i></h1>
+      <div class="caption" style="color: #bababa;min-height: 210px;">
+        <h3>Become Healthy & Fit</h3>
+        <p style="font-size: medium; text-align: left">Whether you'd like to lose weight, gain muscle, or work on your general fitness, we have a workout plan for you!</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail info_div" >
+      <h1><i class="fa fa-group fa-5x"></i></h1>
+      <div class="caption" style="color: #bababa;min-height: 210px;">
+        <h3>Social Network</h3>
+        <p style="font-size: medium; text-align: left">Get along with you compeers within our community and participate in our sport challenges with your friends , keep motivated by comparing your progress with other members!</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail info_div" >
+      <h1><i class="fa fa-mobile fa-5x"></i></h1>
+      <div class="caption" style="color: #bababa;min-height: 210px;">
+        <h3>Calory Tracker</h3>
+        <p style="font-size: medium; text-align: left">We are able to compute the exact amount of calories you have burned by exercise , using your heart rate.</p>
+        <p style="font-size: medium; text-align: left">So installing the Instant Heart Rate for your <a href="https://itunes.apple.com/ca/app/instant-heart-rate-heart-rate/id409625068?mt=8" class="storesLink"><i class="fa fa-apple"></i> iOS</a> device or your <a href="https://play.google.com/store/apps/details?id=si.modula.android.instantheartrate&hl=en" class="storesLink"><i class="fa fa-android"></i> Android</a> device would be great for this purpose. </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+@font-face{font-family:'yekan';src:url('/assets/BYekan.eot'),url('/assets/BYekan.woff'),url('/assets/BYekan.ttf');}
+@font-face {
+    font-family: 'Mj_Sudan Bold';
+    src: local('☺'),
+    local('Mj_Sudan Bold'),
+    url('/assets/sudan.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Mj_Liner XL';
+    src: local('☺'),
+    local('Mj_Liner XL'),
+    url('/assets/MJ_Liner.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+body {
+  font-family: 'yekan';
+}
+
+body,
+input,
+button,
+select,
+textarea,
+p,
+.navbar-search .search-query {
+	font-family: 'yekan' ;
+}
+
+
+.example-dropdown .dropdown-menu {
+  display: block;
+  position: static;
+  margin-bottom: 20px;
+}
+
+.example-container > p > .btn {
+  margin: 5px 0;
+}
+.mainDiv h1{
+    font-family: 'Mj_Liner XL',yekan;
+}
+#khar{
+    font-family: "Mj_Sudan Bold",yekan;
+}

@@ -1,0 +1,2 @@
+<% @iscreate=true %>
+$("#added_exercises").append("<%=  escape_javascript(render partial: 'workout_plans/partial_exercises', locals: {workout_id: @workout_plan_id, workout_including: @workout_include}, object: @exercise)%>")

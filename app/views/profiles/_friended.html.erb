@@ -1,0 +1,20 @@
+<div class="table-responsive" >
+  <table class="table">
+    <tbody>
+    <% @friendships.each do |friendship| %>
+        <% unless friendship.friend.id == current_user.id %>
+            <tr>
+              <td><%=image_tag friendship.friend.profile.avatar.url(:thumb) ,{id: friendship.friend.profile.id , class: "img-circle img-responsive img-thumbnail" , width: "100" , height: "100" , alt: "Profile"}%></td>
+              <td style="direction: ltr"><%= link_to highlight(friendship.friend.profile.firstname+" "+friendship.friend.profile.lastname+" ("+friendship.friend.email+")" ,friendship.friend.profile.firstname+" "+friendship.friend.profile.lastname,:highlighter => '<strong>\1</strong>') ,friendship.friend.profile , class: "btn btn-link" %> </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><%=link_to raw('<h3><span class="glyphicon glyphicon-minus"></span></h3>'), friendship, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link"%>
+              </td>
+            </tr>
+        <% end %>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<%= will_paginate @friendships , renderer: BootstrapPagination::Rails %>

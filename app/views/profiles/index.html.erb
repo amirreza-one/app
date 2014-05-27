@@ -1,0 +1,19 @@
+<h1><%= t('other.listprof') %></h1>
+<br>
+<%= javascript_include_tag 'partial/pagination' %>
+<%= form_tag profiles_path, :method => 'get' , :class => 'form-inline',:id => 'profile_search' do %>
+    <p>
+    <div class="form-group">
+      <%= text_field_tag :search, params[:search] ,:class => 'form-control ' ,:placeholder => t('other.enterplace')%>
+    </div>
+    <div class="form-group">
+      <%= submit_tag t('other.search'),:class => 'btn btn-primary ', :name => nil %>
+    </div>
+    </p>
+<% end %>
+
+<br>
+<br>
+<div id="profile">
+    <%= render 'profiles' %>
+ </div>

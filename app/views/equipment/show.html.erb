@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @equipment.name %>
+</p>
+
+<%= link_to t('other.edit'), edit_equipment_path(@equipment) %> |
+<%= link_to t('other.back'), equipment_index_path %>

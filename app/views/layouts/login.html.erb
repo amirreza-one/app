@@ -1,0 +1,36 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Back !</title>
+  <%= stylesheet_link_tag    'login_import',"application",   media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
+  <script>var __adobewebfontsappname__="dreamweaver"</script>
+  <%= javascript_include_tag :all %>
+  <%= csrf_meta_tag %>
+</head>
+
+<body>
+<div id="unauth">
+  <div id="main" class="container">
+    <div ng-controller="LoginCtrl" class="container-small">
+      <div class="clearfix"><a href="#" ><h1 style="font-family: aladin; font-style: normal; font-weight: 400; color: rgb(255,255,255)"><span class="glyphicon glyphicon-record"></span> Virtual GYM</h1></a></div>
+
+        <%= yield%>
+
+
+    </div>
+  </div>
+  <div class="footer">
+    <div class="container-small">
+      <div class="footer-row">
+        <div class="rights">Virtual GYM, Inc. All Rights Reserved.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

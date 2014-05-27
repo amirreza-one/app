@@ -1,0 +1,31 @@
+<h1><%= t 'other.sent' %></h1>
+<br>
+<br>
+<div class="table-responsive ">
+  <table class="table ">
+    <col width="15%">
+    <col width="15%">
+    <col width="60%">
+    <col width="10%">
+    <thead>
+    <tr>
+      <th></th>
+      <th><%= t 'other.to' %></th>
+      <th><%= t 'other.content' %></th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @messages.each do |message| %>
+        <tr >
+          <td><%= message.created_at.strftime("%B %d, %Y") %></td>
+          <td><%= message.to.email %></td>
+          <td><%= link_to truncate(message.content,:length => 50 , :ommision => "...") ,message , class: 'btn btn-link' %></td>
+          <td><%= link_to raw('<span class="glyphicon glyphicon-trash"></span>'), message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<br>

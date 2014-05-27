@@ -1,0 +1,29 @@
+<h1>Listing likables</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Photo event</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @likables.each do |likable| %>
+      <tr>
+        <td><%= likable.user %></td>
+        <td><%= likable.photo_event %></td>
+        <td><%= link_to 'Show', likable %></td>
+        <td><%= link_to 'Edit', edit_likable_path(likable) %></td>
+        <td><%= link_to 'Destroy', likable, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Likable', new_likable_path %>
