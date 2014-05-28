@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140518062852) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "amount_types", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -202,8 +205,8 @@ ActiveRecord::Schema.define(version: 20140518062852) do
   create_table "workout_includings", force: true do |t|
     t.integer  "workout_plan_id"
     t.integer  "exercise_id"
-    t.integer  "duration"
-    t.integer  "reps"
+    t.integer  "duration",        default: 15
+    t.integer  "reps",            default: 10
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "position",        default: 1
@@ -214,7 +217,7 @@ ActiveRecord::Schema.define(version: 20140518062852) do
     t.string   "difficulty"
     t.string   "part"
     t.string   "mode"
-    t.integer  "profile_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.time     "duration"

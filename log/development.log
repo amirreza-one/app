@@ -2963,3 +2963,1697 @@ Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-05-28 11:01:05 
 
 
 Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-05-28 11:01:05 +0430
+  [1m[36m (3.7ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (1.4ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateExercises (20140310144615)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (3.9ms)[0m  [1mCREATE TABLE "exercises" ("id" serial primary key, "name" character varying(255), "part" character varying(255), "description" text, "description_fa" text, "level" integer, "equipment_id" integer, "days_per_week" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.8ms)[0m  CREATE INDEX "index_exercises_on_equipment_id" ON "exercises" ("equipment_id")
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140310144615"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+Migrating to CreateUsers (20140310144624)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (2.0ms)[0m  CREATE TABLE "users" ("id" serial primary key, "profile_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (0.7ms)[0m  [1mCREATE INDEX "index_users_on_profile_id" ON "users" ("profile_id")[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140310144624"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateWorkouts (20140310150632)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (1.9ms)[0m  [1mCREATE TABLE "workouts" ("id" serial primary key, "user_id" integer, "workout_plan_id" integer, "date" date, "total_min" integer, "total_cal" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (3.1ms)[0m  CREATE INDEX "index_workouts_on_user_id" ON "workouts" ("user_id")
+  [1m[36m (0.9ms)[0m  [1mCREATE INDEX "index_workouts_on_workout_plan_id" ON "workouts" ("workout_plan_id")[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140310150632"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateEquipment (20140310151020)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.4ms)[0m  [1mCREATE TABLE "equipment" ("id" serial primary key, "name" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140310151020"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePlansFoods (20140310151426)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (1.3ms)[0m  [1mCREATE TABLE "foods_plans" ("plan_id" integer, "food_id" integer) [0m
+  [1m[35m (1.2ms)[0m  CREATE INDEX "index_foods_plans_on_plan_id_and_food_id" ON "foods_plans" ("plan_id", "food_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140310151426"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+Migrating to CreateTakingFoodPlans (20140310162207)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (2.0ms)[0m  CREATE TABLE "taking_food_plans" ("id" serial primary key, "plan_id" integer, "profile_id" integer, "summary" character varying(255), "start_time" date, "end_time" date, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (1.4ms)[0m  [1mCREATE INDEX "index_taking_food_plans_on_plan_id_and_profile_id" ON "taking_food_plans" ("plan_id", "profile_id")[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140310162207"]]
+  [1m[36m (0.9ms)[0m  [1mCOMMIT[0m
+Migrating to CreateWorkoutPlanExercise (20140310170635)
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "exercises_workout_plan" ("workout_plan_id" integer, "exercise_id" integer) [0m
+  [1m[35m (0.8ms)[0m  CREATE INDEX "index_exercises_workout_plan_on_workout_plan_id_and_exercise_id" ON "exercises_workout_plan" ("workout_plan_id", "exercise_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140310170635"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+Migrating to CreateFoods (20140311074300)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (4.7ms)[0m  CREATE TABLE "foods" ("id" serial primary key, "name" character varying(255), "calory" integer, "protein" float, "carbohydrate" float, "fat" float, "amount_type_id" integer, "per" float, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (0.8ms)[0m  [1mCREATE INDEX "index_foods_on_amount_type_id" ON "foods" ("amount_type_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140311074300"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateAmountTypes (20140311074840)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.0ms)[0m  [1mCREATE TABLE "amount_types" ("id" serial primary key, "name" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140311074840"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to AddDeviseToUsers (20140311135226)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.9ms)[0m  [1mALTER TABLE "users" ADD COLUMN "email" character varying(255) DEFAULT '' NOT NULL[0m
+  [1m[35m (6.6ms)[0m  ALTER TABLE "users" ADD COLUMN "encrypted_password" character varying(255) DEFAULT '' NOT NULL
+  [1m[36m (0.9ms)[0m  [1mALTER TABLE "users" ADD COLUMN "reset_password_token" character varying(255)[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "users" ADD COLUMN "reset_password_sent_at" timestamp
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD COLUMN "remember_created_at" timestamp[0m
+  [1m[35m (3.4ms)[0m  ALTER TABLE "users" ADD COLUMN "sign_in_count" integer DEFAULT 0 NOT NULL
+  [1m[36m (0.7ms)[0m  [1mALTER TABLE "users" ADD COLUMN "current_sign_in_at" timestamp[0m
+  [1m[35m (0.7ms)[0m  ALTER TABLE "users" ADD COLUMN "last_sign_in_at" timestamp
+  [1m[36m (0.8ms)[0m  [1mALTER TABLE "users" ADD COLUMN "current_sign_in_ip" character varying(255)[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "users" ADD COLUMN "last_sign_in_ip" character varying(255)
+  [1m[36m (3.0ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.7ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140311135226"]]
+  [1m[35m (1.4ms)[0m  COMMIT
+Migrating to CreateProfiles (20140322194238)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (5.0ms)[0m  CREATE TABLE "profiles" ("id" serial primary key, "firstname" character varying(255), "lastname" character varying(255), "birthdate" date, "height" integer, "weight" integer, "country" character varying(255), "city" character varying(255), "role" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140322194238"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+Migrating to CreatePlans (20140323145556)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (2.2ms)[0m  CREATE TABLE "plans" ("id" serial primary key, "total_cal" integer, "total_protein" float, "total_carbohydrate" float, "total_fat" float, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140323145556"]]
+  [1m[35m (0.7ms)[0m  COMMIT
+Migrating to AddAttachmentAvatarToProfiles (20140407212538)
+  [1m[36m (0.7ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.7ms)[0m  ALTER TABLE "profiles" ADD COLUMN "avatar_file_name" character varying(255)
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "profiles" ADD COLUMN "avatar_content_type" character varying(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "profiles" ADD COLUMN "avatar_file_size" integer
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "profiles" ADD COLUMN "avatar_updated_at" timestamp[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140407212538"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+Migrating to AddAttachmentCoverToProfiles (20140407214405)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "profiles" ADD COLUMN "cover_file_name" character varying(255)[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "profiles" ADD COLUMN "cover_content_type" character varying(255)
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "profiles" ADD COLUMN "cover_file_size" integer[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "profiles" ADD COLUMN "cover_updated_at" timestamp
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140407214405"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+Migrating to CreateWorkoutPlans (20140408113420)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (5.2ms)[0m  CREATE TABLE "workout_plans" ("id" serial primary key, "name" character varying(255), "difficulty" character varying(255), "part" character varying(255), "mode" character varying(255), "user_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140408113420"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+Migrating to AddAttachmentAvatarToFoods (20140408150943)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (1.1ms)[0m  ALTER TABLE "foods" ADD COLUMN "avatar_file_name" character varying(255)
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "foods" ADD COLUMN "avatar_content_type" character varying(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "foods" ADD COLUMN "avatar_file_size" integer
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "foods" ADD COLUMN "avatar_updated_at" timestamp[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140408150943"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to AddVideoToExercise (20140410161043)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "exercises" ADD COLUMN "video" character varying(255)[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140410161043"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+Migrating to AddAttachmentAvatarToExercises (20140410222411)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.7ms)[0m  [1mALTER TABLE "exercises" ADD COLUMN "avatar_file_name" character varying(255)[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "exercises" ADD COLUMN "avatar_content_type" character varying(255)
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "exercises" ADD COLUMN "avatar_file_size" integer[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "exercises" ADD COLUMN "avatar_updated_at" timestamp
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140410222411"]]
+  [1m[35m (0.7ms)[0m  COMMIT
+Migrating to AddLanguageToProfiles (20140412130704)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "profiles" ADD COLUMN "language" character varying(255)
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140412130704"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+Migrating to AddDurationToWorkoutPlan (20140412144217)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "workout_plans" ADD COLUMN "duration" time
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140412144217"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+Migrating to CreateFriendships (20140414181756)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (1.9ms)[0m  CREATE TABLE "friendships" ("id" serial primary key, "user_id" integer, "friend_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140414181756"]]
+  [1m[35m (0.7ms)[0m  COMMIT
+Migrating to AddIndexToFriendship (20140419153646)
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35m (1.2ms)[0m  CREATE INDEX "index_friendships_on_user_id" ON "friendships" ("user_id")
+  [1m[36m (0.8ms)[0m  [1mCREATE INDEX "index_friendships_on_friend_id" ON "friendships" ("friend_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140419153646"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateMessages (20140419170542)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (5.8ms)[0m  [1mCREATE TABLE "messages" ("id" serial primary key, "from_id" integer, "to_id" integer, "content" text, "status" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140419170542"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateWorkoutIncludings (20140429074640)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.1ms)[0m  [1mCREATE TABLE "workout_includings" ("id" serial primary key, "workout_plan_id" integer, "exercise_id" integer, "duration" integer DEFAULT 15, "reps" integer DEFAULT 10, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140429074640"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateAuxilaryProfiles (20140504153254)
+  [1m[35m (2.4ms)[0m  BEGIN
+  [1m[36m (2.6ms)[0m  [1mCREATE TABLE "auxilary_profiles" ("id" serial primary key, "weight" integer, "height" integer, "profile_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.8ms)[0m  CREATE INDEX "index_auxilary_profiles_on_profile_id" ON "auxilary_profiles" ("profile_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140504153254"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+Migrating to AddGenderToProfile (20140505144858)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (2.9ms)[0m  ALTER TABLE "profiles" ADD COLUMN "gender" integer DEFAULT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140505144858"]]
+  [1m[35m (0.7ms)[0m  COMMIT
+Migrating to CreatePhotoEvents (20140507084551)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (4.8ms)[0m  CREATE TABLE "photo_events" ("id" serial primary key, "summary" text, "profile_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (1.3ms)[0m  [1mCREATE INDEX "index_photo_events_on_profile_id" ON "photo_events" ("profile_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140507084551"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to AddAttachmentPhotoToPhotoEvents (20140507084817)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "photo_events" ADD COLUMN "photo_file_name" character varying(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "photo_events" ADD COLUMN "photo_content_type" character varying(255)
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "photo_events" ADD COLUMN "photo_file_size" integer[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "photo_events" ADD COLUMN "photo_updated_at" timestamp
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140507084817"]]
+  [1m[35m (0.6ms)[0m  COMMIT
+Migrating to AddPositionToWorkoutIncludings (20140508104634)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (4.1ms)[0m  ALTER TABLE "workout_includings" ADD COLUMN "position" integer DEFAULT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140508104634"]]
+  [1m[35m (0.7ms)[0m  COMMIT
+Migrating to CreateLikables (20140514111235)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (2.6ms)[0m  CREATE TABLE "likables" ("id" serial primary key, "user_id" integer, "photo_event_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (0.7ms)[0m  [1mCREATE INDEX "index_likables_on_user_id" ON "likables" ("user_id")[0m
+  [1m[35m (1.6ms)[0m  CREATE INDEX "index_likables_on_photo_event_id" ON "likables" ("photo_event_id")
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140514111235"]]
+  [1m[35m (0.6ms)[0m  COMMIT
+Migrating to CreateRequestFriendships (20140514114634)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (2.1ms)[0m  CREATE TABLE "request_friendships" ("id" serial primary key, "user_id" integer, "request_to_id" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140514114634"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+Migrating to ChangeDefaultRoleProfile (20140518062852)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.7ms)[0m  ALTER TABLE "profiles" ALTER COLUMN "role" SET DEFAULT 0
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140518062852"]]
+  [1m[35m (0.8ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2014-05-28 18:53:12 +0430
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered devise/shared/_links.erb (0.9ms)
+  Rendered devise/registrations/new.html.erb within layouts/signup (63.5ms)
+Completed 200 OK in 414ms (Views: 389.3ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/assets/SideNavigation/component.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/custom-profile-master.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/search_box.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/twitter/bootstrap.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/font-awesome.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/amount_types.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/exercises.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/equipment.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/profiles.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/jquery-ui-1.10.4.custom.min.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/foods.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/plans.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/test.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/scaffolds.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/tests.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/users.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/custom-login.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/timer.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/workouts.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/workout_plan.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/jquery-ui-1.10.4.custom.min.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered devise/shared/_links.erb (0.1ms)
+  Rendered devise/registrations/new.html.erb within layouts/signup (6.2ms)
+Completed 200 OK in 79ms (Views: 78.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/twitter/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/twitter/bootstrap/button.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/twitter/bootstrap/transition.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/twitter/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/twitter/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/twitter/bootstrap/alert.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/twitter/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/twitter/bootstrap/modal.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/twitter/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/twitter/bootstrap/popover.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/SideNavigation/component.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/font-awesome.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/twitter/bootstrap.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/custom-profile-master.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/search_box.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/twitter/bootstrap/affix.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/twitter/bootstrap/tab.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/aladin.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/amount_types.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/javascripts/all.js" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+ActionController::RoutingError (No route matches [GET] "/javascripts/all.js"):
+  actionpack (4.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.3) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.3) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.3) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.3) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.0.3) lib/rails/engine.rb:511:in `call'
+  railties (4.0.3) lib/rails/application.rb:97:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  thin (1.6.2) lib/thin/connection.rb:86:in `block in pre_process'
+  thin (1.6.2) lib/thin/connection.rb:84:in `catch'
+  thin (1.6.2) lib/thin/connection.rb:84:in `pre_process'
+  thin (1.6.2) lib/thin/connection.rb:53:in `process'
+  thin (1.6.2) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run'
+  thin (1.6.2) lib/thin/backends/base.rb:73:in `start'
+  thin (1.6.2) lib/thin/server.rb:162:in `start'
+  rack (1.5.2) lib/rack/handler/thin.rb:16:in `run'
+  rack (1.5.2) lib/rack/server.rb:264:in `start'
+  railties (4.0.3) lib/rails/commands/server.rb:84:in `start'
+  railties (4.0.3) lib/rails/commands.rb:76:in `block in <top (required)>'
+  railties (4.0.3) lib/rails/commands.rb:71:in `tap'
+  railties (4.0.3) lib/rails/commands.rb:71:in `<top (required)>'
+  bin/rails:4:in `require'
+  bin/rails:4:in `<main>'
+
+
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/routes/_route.html.erb (11.3ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/routes/_table.html.erb (3.4ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (150.6ms)
+
+
+Started GET "/assets/All/equipment.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/foods.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/exercises.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/plans.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/jquery-ui-1.10.4.custom.min.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/profiles.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/scaffolds.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/test.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/tests.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/timer.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/users.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/custom-login.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/workout_plan.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/All/workouts.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/jquery-ui-1.10.4.custom.min.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/twitter/bootstrap/transition.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/twitter/bootstrap/alert.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:13 +0430
+
+
+Started GET "/assets/twitter/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:14 +0430
+
+
+Started GET "/assets/twitter/bootstrap/button.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:14 +0430
+
+
+Started GET "/assets/twitter/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:14 +0430
+
+
+Started GET "/assets/twitter/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:14 +0430
+
+
+Started GET "/assets/twitter/bootstrap/modal.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:14 +0430
+
+
+Started GET "/assets/twitter/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:14 +0430
+
+
+Started GET "/assets/twitter/bootstrap/popover.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:14 +0430
+
+
+Started GET "/assets/twitter/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:14 +0430
+
+
+Started GET "/assets/twitter/bootstrap/tab.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:14 +0430
+
+
+Started GET "/assets/twitter/bootstrap/affix.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:14 +0430
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:14 +0430
+
+
+Started GET "/assets/aladin.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:14 +0430
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:14 +0430
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:14 +0430
+
+
+Started GET "/javascripts/all.js" for 127.0.0.1 at 2014-05-28 18:53:14 +0430
+
+ActionController::RoutingError (No route matches [GET] "/javascripts/all.js"):
+  actionpack (4.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.3) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.3) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.3) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.3) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.0.3) lib/rails/engine.rb:511:in `call'
+  railties (4.0.3) lib/rails/application.rb:97:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  thin (1.6.2) lib/thin/connection.rb:86:in `block in pre_process'
+  thin (1.6.2) lib/thin/connection.rb:84:in `catch'
+  thin (1.6.2) lib/thin/connection.rb:84:in `pre_process'
+  thin (1.6.2) lib/thin/connection.rb:53:in `process'
+  thin (1.6.2) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run'
+  thin (1.6.2) lib/thin/backends/base.rb:73:in `start'
+  thin (1.6.2) lib/thin/server.rb:162:in `start'
+  rack (1.5.2) lib/rack/handler/thin.rb:16:in `run'
+  rack (1.5.2) lib/rack/server.rb:264:in `start'
+  railties (4.0.3) lib/rails/commands/server.rb:84:in `start'
+  railties (4.0.3) lib/rails/commands.rb:76:in `block in <top (required)>'
+  railties (4.0.3) lib/rails/commands.rb:71:in `tap'
+  railties (4.0.3) lib/rails/commands.rb:71:in `<top (required)>'
+  bin/rails:4:in `require'
+  bin/rails:4:in `<main>'
+
+
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/routes/_route.html.erb (11.3ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.1ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (141.9ms)
+
+
+Started GET "/assets/background.jpg" for 127.0.0.1 at 2014-05-28 18:53:16 +0430
+
+
+Started GET "/assets/background.jpg" for 127.0.0.1 at 2014-05-28 18:53:16 +0430
+
+
+Started GET "/assets/fontawesome-webfont.woff?v=4.0.2" for 127.0.0.1 at 2014-05-28 18:53:16 +0430
+
+
+Started GET "/assets/twitter/bootstrap/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2014-05-28 18:53:16 +0430
+
+
+Started GET "/assets/twitter/bootstrap/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2014-05-28 18:53:16 +0430
+
+
+Started GET "/assets/fontawesome-webfont.woff?v=4.0.2" for 127.0.0.1 at 2014-05-28 18:53:16 +0430
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2014-05-28 18:53:18 +0430
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.erb (0.1ms)
+  Rendered devise/sessions/new.html.erb within layouts/login (11.5ms)
+Completed 200 OK in 61ms (Views: 55.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/login_import.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:18 +0430
+
+
+Started GET "/javascripts/all.js" for 127.0.0.1 at 2014-05-28 18:53:18 +0430
+
+ActionController::RoutingError (No route matches [GET] "/javascripts/all.js"):
+  actionpack (4.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.3) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.3) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.3) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.3) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.0.3) lib/rails/engine.rb:511:in `call'
+  railties (4.0.3) lib/rails/application.rb:97:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  thin (1.6.2) lib/thin/connection.rb:86:in `block in pre_process'
+  thin (1.6.2) lib/thin/connection.rb:84:in `catch'
+  thin (1.6.2) lib/thin/connection.rb:84:in `pre_process'
+  thin (1.6.2) lib/thin/connection.rb:53:in `process'
+  thin (1.6.2) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run'
+  thin (1.6.2) lib/thin/backends/base.rb:73:in `start'
+  thin (1.6.2) lib/thin/server.rb:162:in `start'
+  rack (1.5.2) lib/rack/handler/thin.rb:16:in `run'
+  rack (1.5.2) lib/rack/server.rb:264:in `start'
+  railties (4.0.3) lib/rails/commands/server.rb:84:in `start'
+  railties (4.0.3) lib/rails/commands.rb:76:in `block in <top (required)>'
+  railties (4.0.3) lib/rails/commands.rb:71:in `tap'
+  railties (4.0.3) lib/rails/commands.rb:71:in `<top (required)>'
+  bin/rails:4:in `require'
+  bin/rails:4:in `<main>'
+
+
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.9ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/routes/_route.html.erb (11.7ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.1ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (152.3ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2014-05-28 18:53:25 +0430
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"B/alyMnxF/Ho/xSzM4DeMTZRF96lmIb676YDkXttxmo=", "user"=>{"email"=>"a@a.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Lets Go"}
+  [1m[35mUser Load (1.5ms)[0m  SELECT "users".* FROM "users" WHERE "users"."email" = 'a@a.com' ORDER BY "users"."id" ASC LIMIT 1
+Completed 401 Unauthorized in 8ms
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"B/alyMnxF/Ho/xSzM4DeMTZRF96lmIb676YDkXttxmo=", "user"=>{"email"=>"a@a.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Lets Go"}
+  Rendered devise/shared/_links.erb (0.1ms)
+  Rendered devise/sessions/new.html.erb within layouts/login (3.3ms)
+Completed 200 OK in 102ms (Views: 33.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/javascripts/all.js" for 127.0.0.1 at 2014-05-28 18:53:26 +0430
+
+ActionController::RoutingError (No route matches [GET] "/javascripts/all.js"):
+  actionpack (4.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.3) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.3) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.3) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.3) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.0.3) lib/rails/engine.rb:511:in `call'
+  railties (4.0.3) lib/rails/application.rb:97:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  thin (1.6.2) lib/thin/connection.rb:86:in `block in pre_process'
+  thin (1.6.2) lib/thin/connection.rb:84:in `catch'
+  thin (1.6.2) lib/thin/connection.rb:84:in `pre_process'
+  thin (1.6.2) lib/thin/connection.rb:53:in `process'
+  thin (1.6.2) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run'
+  thin (1.6.2) lib/thin/backends/base.rb:73:in `start'
+  thin (1.6.2) lib/thin/server.rb:162:in `start'
+  rack (1.5.2) lib/rack/handler/thin.rb:16:in `run'
+  rack (1.5.2) lib/rack/server.rb:264:in `start'
+  railties (4.0.3) lib/rails/commands/server.rb:84:in `start'
+  railties (4.0.3) lib/rails/commands.rb:76:in `block in <top (required)>'
+  railties (4.0.3) lib/rails/commands.rb:71:in `tap'
+  railties (4.0.3) lib/rails/commands.rb:71:in `<top (required)>'
+  bin/rails:4:in `require'
+  bin/rails:4:in `<main>'
+
+
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.5ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/routes/_route.html.erb (11.7ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.1ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (139.2ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2014-05-28 18:53:29 +0430
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered devise/shared/_links.erb (0.1ms)
+  Rendered devise/registrations/new.html.erb within layouts/signup (4.2ms)
+Completed 200 OK in 38ms (Views: 36.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/javascripts/all.js" for 127.0.0.1 at 2014-05-28 18:53:29 +0430
+
+ActionController::RoutingError (No route matches [GET] "/javascripts/all.js"):
+  actionpack (4.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.3) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.3) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.3) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.3) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.0.3) lib/rails/engine.rb:511:in `call'
+  railties (4.0.3) lib/rails/application.rb:97:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  thin (1.6.2) lib/thin/connection.rb:86:in `block in pre_process'
+  thin (1.6.2) lib/thin/connection.rb:84:in `catch'
+  thin (1.6.2) lib/thin/connection.rb:84:in `pre_process'
+  thin (1.6.2) lib/thin/connection.rb:53:in `process'
+  thin (1.6.2) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run'
+  thin (1.6.2) lib/thin/backends/base.rb:73:in `start'
+  thin (1.6.2) lib/thin/server.rb:162:in `start'
+  rack (1.5.2) lib/rack/handler/thin.rb:16:in `run'
+  rack (1.5.2) lib/rack/server.rb:264:in `start'
+  railties (4.0.3) lib/rails/commands/server.rb:84:in `start'
+  railties (4.0.3) lib/rails/commands.rb:76:in `block in <top (required)>'
+  railties (4.0.3) lib/rails/commands.rb:71:in `tap'
+  railties (4.0.3) lib/rails/commands.rb:71:in `<top (required)>'
+  bin/rails:4:in `require'
+  bin/rails:4:in `<main>'
+
+
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/routes/_route.html.erb (18.0ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.2ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (143.9ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2014-05-28 18:53:37 +0430
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"B/alyMnxF/Ho/xSzM4DeMTZRF96lmIb676YDkXttxmo=", "user"=>{"email"=>"a@a.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'a@a.com' LIMIT 1
+  [1m[36mSQL (5.6ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "encrypted_password", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", Wed, 28 May 2014 14:23:38 UTC +00:00], ["email", "a@a.com"], ["encrypted_password", "$2a$10$hyAZGGn3UpEjRu3vnE.qg.MkQGXTVkRx0151twCVd02qVNnJ53gce"], ["updated_at", Wed, 28 May 2014 14:23:38 UTC +00:00]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  UPDATE "users" SET "last_sign_in_at" = $1, "current_sign_in_at" = $2, "last_sign_in_ip" = $3, "current_sign_in_ip" = $4, "sign_in_count" = $5, "updated_at" = $6 WHERE "users"."id" = 1  [["last_sign_in_at", Wed, 28 May 2014 14:23:38 UTC +00:00], ["current_sign_in_at", Wed, 28 May 2014 14:23:38 UTC +00:00], ["last_sign_in_ip", "127.0.0.1"], ["current_sign_in_ip", "127.0.0.1"], ["sign_in_count", 1], ["updated_at", Wed, 28 May 2014 14:23:38 UTC +00:00]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/profiles/new
+Completed 302 Found in 107ms (ActiveRecord: 8.1ms)
+
+
+Started GET "/profiles/new" for 127.0.0.1 at 2014-05-28 18:53:38 +0430
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#new as HTML
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)[0m  [["to_id", 1]]
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)
+  Rendered profiles/_form.html.erb (35.5ms)
+  Rendered profiles/new.html.erb within layouts/admin (37.8ms)
+  Rendered layouts/_friend_modal.html.erb (0.7ms)
+  Rendered challenges/_challenge_modal.html.erb (0.6ms)
+Completed 200 OK in 214ms (Views: 154.0ms | ActiveRecord: 7.2ms)
+
+
+Started GET "/assets/pnotify.custom.min.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:38 +0430
+
+
+Started GET "/assets/hammer.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:38 +0430
+
+
+Started GET "/assets/pnotify.custom.min.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:38 +0430
+
+
+Started GET "/assets/SideNavigation/modernizr.custom.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:38 +0430
+
+
+Started GET "/assets/partial/search_layout.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:38 +0430
+
+
+Started GET "/javascripts/data-turbolinks-track.js" for 127.0.0.1 at 2014-05-28 18:53:38 +0430
+
+ActionController::RoutingError (No route matches [GET] "/javascripts/data-turbolinks-track.js"):
+  actionpack (4.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.3) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.3) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.3) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.3) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.0.3) lib/rails/engine.rb:511:in `call'
+  railties (4.0.3) lib/rails/application.rb:97:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  thin (1.6.2) lib/thin/connection.rb:86:in `block in pre_process'
+  thin (1.6.2) lib/thin/connection.rb:84:in `catch'
+  thin (1.6.2) lib/thin/connection.rb:84:in `pre_process'
+  thin (1.6.2) lib/thin/connection.rb:53:in `process'
+  thin (1.6.2) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run'
+  thin (1.6.2) lib/thin/backends/base.rb:73:in `start'
+  thin (1.6.2) lib/thin/server.rb:162:in `start'
+  rack (1.5.2) lib/rack/handler/thin.rb:16:in `run'
+  rack (1.5.2) lib/rack/server.rb:264:in `start'
+  railties (4.0.3) lib/rails/commands/server.rb:84:in `start'
+  railties (4.0.3) lib/rails/commands.rb:76:in `block in <top (required)>'
+  railties (4.0.3) lib/rails/commands.rb:71:in `tap'
+  railties (4.0.3) lib/rails/commands.rb:71:in `<top (required)>'
+  bin/rails:4:in `require'
+  bin/rails:4:in `<main>'
+
+
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.9ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/routes/_route.html.erb (10.2ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.1ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (177.5ms)
+
+
+Started GET "/assets/Video%20Gallery/html5gallery.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:38 +0430
+
+
+Started GET "/assets/Flipclock/base.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:38 +0430
+
+
+Started GET "/assets/Flipclock/flipclock.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:38 +0430
+
+
+Started GET "/assets/Flipclock/hourlycounter.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:38 +0430
+
+
+Started GET "/assets/SideNavigation/icons.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:38 +0430
+
+
+Started GET "/assets/Flipclock/minutecounter.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:38 +0430
+
+
+Started GET "/assets/Flipclock/flipclock.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:38 +0430
+
+
+Started GET "/assets/SideNavigation/normalize.css?body=1" for 127.0.0.1 at 2014-05-28 18:53:38 +0430
+
+
+Started GET "/assets/SideNavigation/classie.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:38 +0430
+
+
+Started GET "/assets/SideNavigation/sidebarEffects.js?body=1" for 127.0.0.1 at 2014-05-28 18:53:38 +0430
+
+
+Started GET "/assets/search.png" for 127.0.0.1 at 2014-05-28 18:53:38 +0430
+
+
+Started GET "/assets/All/background.jpg" for 127.0.0.1 at 2014-05-28 18:53:38 +0430
+
+
+Started POST "/profiles" for 127.0.0.1 at 2014-05-28 18:54:05 +0430
+  [1m[36mUser Load (1.8ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Processing by ProfilesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"B/alyMnxF/Ho/xSzM4DeMTZRF96lmIb676YDkXttxmo=", "profile"=>{"firstname"=>"Amirreza", "lastname"=>"SH", "birthdate(1i)"=>"1992", "birthdate(2i)"=>"12", "birthdate(3i)"=>"11", "height"=>"190", "weight"=>"79", "gender"=>"1", "country"=>"Iran", "city"=>"Tehran", "language"=>"en"}, "commit"=>"Create Profile"}
+  [1m[35m (0.5ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.8ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (2.4ms)[0m  [1mINSERT INTO "profiles" ("birthdate", "city", "country", "created_at", "firstname", "height", "language", "lastname", "updated_at", "weight") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["birthdate", Fri, 11 Dec 1992], ["city", "Tehran"], ["country", "Iran"], ["created_at", Wed, 28 May 2014 14:24:05 UTC +00:00], ["firstname", "Amirreza"], ["height", 190], ["language", "en"], ["lastname", "SH"], ["updated_at", Wed, 28 May 2014 14:24:05 UTC +00:00], ["weight", 79]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (2.2ms)[0m  INSERT INTO "auxilary_profiles" ("created_at", "height", "profile_id", "updated_at", "weight") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", Wed, 28 May 2014 14:24:05 UTC +00:00], ["height", 190], ["profile_id", 1], ["updated_at", Wed, 28 May 2014 14:24:05 UTC +00:00], ["weight", 79]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mUPDATE "users" SET "profile_id" = $1, "updated_at" = $2 WHERE "users"."id" = 1[0m  [["profile_id", 1], ["updated_at", Wed, 28 May 2014 14:24:05 UTC +00:00]]
+  [1m[35m (0.3ms)[0m  COMMIT
+Redirected to http://localhost:3000/profiles/1
+Completed 302 Found in 45ms (ActiveRecord: 12.8ms)
+
+
+Started GET "/profiles/1" for 127.0.0.1 at 2014-05-28 18:54:05 +0430
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Processing by ProfilesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProfile Load (0.6ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)[0m  [["to_id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)
+  [1m[36mProfile Load (0.4ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 LIMIT 1[0m  [["id", "1"]]
+  [1m[35mUser Load (0.6ms)[0m  SELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1  [["profile_id", 1]]
+DEPRECATION WARNING: Calling #find(:first) is deprecated. Please call #first directly instead. You have also used finder options. These are also deprecated. Please build a scope instead of using finder options. (called from show at /Users/MacbookPro/Sites/Ruby On Rails/virtualgym/app/controllers/profiles_controller.rb:27)
+  [1m[36mRequestFriendship Load (0.3ms)[0m  [1mSELECT "request_friendships".* FROM "request_friendships" WHERE "request_friendships"."user_id" = 1 AND "request_friendships"."request_to_id" = 1 ORDER BY "request_friendships"."id" ASC LIMIT 1[0m
+DEPRECATION WARNING: Calling #find(:first) is deprecated. Please call #first directly instead. You have also used finder options. These are also deprecated. Please build a scope instead of using finder options. (called from show at /Users/MacbookPro/Sites/Ruby On Rails/virtualgym/app/controllers/profiles_controller.rb:30)
+  [1m[35mFriendship Load (0.5ms)[0m  SELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 1 AND "friendships"."friend_id" = 1 ORDER BY "friendships"."id" ASC LIMIT 1
+  [1m[36m (0.5ms)[0m  [1mSELECT SUM("workouts"."total_min") AS sum_id FROM "workouts" WHERE "workouts"."user_id" = 1[0m
+  [1m[35m (0.2ms)[0m  SELECT SUM("workouts"."total_cal") AS sum_id FROM "workouts" WHERE "workouts"."user_id" = 1
+  [1m[36m (0.7ms)[0m  [1mSELECT COUNT(*) FROM "photo_events" WHERE "photo_events"."profile_id" = $1[0m  [["profile_id", 1]]
+  Rendered profiles/_information_mobile.html.erb (3.7ms)
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(*) FROM "photo_events" WHERE "photo_events"."profile_id" = $1  [["profile_id", 1]]
+  Rendered profiles/show.html.erb within layouts/admin (19.0ms)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM "photo_events" WHERE "photo_events"."profile_id" = $1[0m  [["profile_id", 1]]
+  Rendered layouts/_friend_modal.html.erb (0.2ms)
+  Rendered challenges/_challenge_modal.html.erb (0.1ms)
+Completed 200 OK in 100ms (Views: 75.7ms | ActiveRecord: 6.7ms)
+
+
+Started GET "/javascripts/data-turbolinks-track.js" for 127.0.0.1 at 2014-05-28 18:54:06 +0430
+
+ActionController::RoutingError (No route matches [GET] "/javascripts/data-turbolinks-track.js"):
+  actionpack (4.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.3) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.3) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.3) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.3) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.0.3) lib/rails/engine.rb:511:in `call'
+  railties (4.0.3) lib/rails/application.rb:97:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  thin (1.6.2) lib/thin/connection.rb:86:in `block in pre_process'
+  thin (1.6.2) lib/thin/connection.rb:84:in `catch'
+  thin (1.6.2) lib/thin/connection.rb:84:in `pre_process'
+  thin (1.6.2) lib/thin/connection.rb:53:in `process'
+  thin (1.6.2) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run'
+  thin (1.6.2) lib/thin/backends/base.rb:73:in `start'
+  thin (1.6.2) lib/thin/server.rb:162:in `start'
+  rack (1.5.2) lib/rack/handler/thin.rb:16:in `run'
+  rack (1.5.2) lib/rack/server.rb:264:in `start'
+  railties (4.0.3) lib/rails/commands/server.rb:84:in `start'
+  railties (4.0.3) lib/rails/commands.rb:76:in `block in <top (required)>'
+  railties (4.0.3) lib/rails/commands.rb:71:in `tap'
+  railties (4.0.3) lib/rails/commands.rb:71:in `<top (required)>'
+  bin/rails:4:in `require'
+  bin/rails:4:in `<main>'
+
+
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.3ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/routes/_route.html.erb (11.1ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.4ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (153.0ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=sa&_=1401287046050" for 127.0.0.1 at 2014-05-28 18:54:10 +0430
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"sa", "_"=>"1401287046050"}
+  [1m[36mProfile Load (0.4ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx[0m  Retrying query "SELECT * FROM `profile_core` WHERE MATCH('sa') AND `sphinx_deleted` = 0 LIMIT 0, 5; SHOW META" after error: Can't connect to MySQL server on '127.0.0.1' (61)
+  [1m[32mSphinx[0m  Retrying query "SELECT * FROM `profile_core` WHERE MATCH('sa') AND `sphinx_deleted` = 0 LIMIT 0, 5; SHOW META" after error: Can't connect to MySQL server on '127.0.0.1' (61)
+  [1m[32mSphinx Query (10.7ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('sa') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  Rendered profiles/_search_result.html.erb (19.0ms)
+  Rendered profiles/index.js.erb (24.3ms)
+Completed 500 Internal Server Error in 40ms
+
+ActionView::Template::Error (Can't connect to MySQL server on '127.0.0.1' (61)):
+    1: <% @search_box.each do |profile| %>
+    2:     <li ><%= link_to raw("#{image_tag profile.avatar.url(:small), class: "img-circle " , width: "35" , height: "35"} #{profile.firstname} #{profile.lastname}<br /><span>#{profile.user.email}</span>"),profile ,style: 'color: #808394'%></li>
+    3: <% end %>
+    4: <li><%= link_to raw( t 'other.more_result'),profiles_path ,style: 'color: #808394'%></li>
+  app/views/profiles/_search_result.html.erb:1:in `_app_views_profiles__search_result_html_erb__1391276594353415027_70342238067320'
+  app/views/profiles/index.js.erb:1:in `_app_views_profiles_index_js_erb___509164311407664852_70342238114060'
+
+
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.1ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (12.0ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=sa&_=1401287046051" for 127.0.0.1 at 2014-05-28 18:54:10 +0430
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"sa", "_"=>"1401287046051"}
+  [1m[36mProfile Load (0.4ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx[0m  Retrying query "SELECT * FROM `profile_core` WHERE MATCH('sa') AND `sphinx_deleted` = 0 LIMIT 0, 5; SHOW META" after error: Can't connect to MySQL server on '127.0.0.1' (61)
+  [1m[32mSphinx[0m  Retrying query "SELECT * FROM `profile_core` WHERE MATCH('sa') AND `sphinx_deleted` = 0 LIMIT 0, 5; SHOW META" after error: Can't connect to MySQL server on '127.0.0.1' (61)
+  [1m[32mSphinx Query (2.8ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('sa') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  Rendered profiles/_search_result.html.erb (7.1ms)
+  Rendered profiles/index.js.erb (10.6ms)
+Completed 500 Internal Server Error in 23ms
+
+ActionView::Template::Error (Can't connect to MySQL server on '127.0.0.1' (61)):
+    1: <% @search_box.each do |profile| %>
+    2:     <li ><%= link_to raw("#{image_tag profile.avatar.url(:small), class: "img-circle " , width: "35" , height: "35"} #{profile.firstname} #{profile.lastname}<br /><span>#{profile.user.email}</span>"),profile ,style: 'color: #808394'%></li>
+    3: <% end %>
+    4: <li><%= link_to raw( t 'other.more_result'),profiles_path ,style: 'color: #808394'%></li>
+  app/views/profiles/_search_result.html.erb:1:in `_app_views_profiles__search_result_html_erb__1391276594353415027_70342238067320'
+  app/views/profiles/index.js.erb:1:in `_app_views_profiles_index_js_erb___509164311407664852_70342238114060'
+
+
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.9ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (10.1ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=sain&_=1401287046052" for 127.0.0.1 at 2014-05-28 18:54:10 +0430
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"sain", "_"=>"1401287046052"}
+  [1m[36mProfile Load (0.4ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx[0m  Retrying query "SELECT * FROM `profile_core` WHERE MATCH('sain') AND `sphinx_deleted` = 0 LIMIT 0, 5; SHOW META" after error: Can't connect to MySQL server on '127.0.0.1' (61)
+  [1m[32mSphinx[0m  Retrying query "SELECT * FROM `profile_core` WHERE MATCH('sain') AND `sphinx_deleted` = 0 LIMIT 0, 5; SHOW META" after error: Can't connect to MySQL server on '127.0.0.1' (61)
+  [1m[32mSphinx Query (2.7ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('sain') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  Rendered profiles/_search_result.html.erb (6.9ms)
+  Rendered profiles/index.js.erb (10.5ms)
+Completed 500 Internal Server Error in 23ms
+
+ActionView::Template::Error (Can't connect to MySQL server on '127.0.0.1' (61)):
+    1: <% @search_box.each do |profile| %>
+    2:     <li ><%= link_to raw("#{image_tag profile.avatar.url(:small), class: "img-circle " , width: "35" , height: "35"} #{profile.firstname} #{profile.lastname}<br /><span>#{profile.user.email}</span>"),profile ,style: 'color: #808394'%></li>
+    3: <% end %>
+    4: <li><%= link_to raw( t 'other.more_result'),profiles_path ,style: 'color: #808394'%></li>
+  app/views/profiles/_search_result.html.erb:1:in `_app_views_profiles__search_result_html_erb__1391276594353415027_70342238067320'
+  app/views/profiles/index.js.erb:1:in `_app_views_profiles_index_js_erb___509164311407664852_70342238114060'
+
+
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.9ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (9.9ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=sain&_=1401287046053" for 127.0.0.1 at 2014-05-28 18:54:10 +0430
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"sain", "_"=>"1401287046053"}
+  [1m[36mProfile Load (0.4ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx[0m  Retrying query "SELECT * FROM `profile_core` WHERE MATCH('sain') AND `sphinx_deleted` = 0 LIMIT 0, 5; SHOW META" after error: Can't connect to MySQL server on '127.0.0.1' (61)
+  [1m[32mSphinx[0m  Retrying query "SELECT * FROM `profile_core` WHERE MATCH('sain') AND `sphinx_deleted` = 0 LIMIT 0, 5; SHOW META" after error: Can't connect to MySQL server on '127.0.0.1' (61)
+  [1m[32mSphinx Query (3.3ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('sain') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  Rendered profiles/_search_result.html.erb (8.5ms)
+  Rendered profiles/index.js.erb (12.1ms)
+Completed 500 Internal Server Error in 22ms
+
+ActionView::Template::Error (Can't connect to MySQL server on '127.0.0.1' (61)):
+    1: <% @search_box.each do |profile| %>
+    2:     <li ><%= link_to raw("#{image_tag profile.avatar.url(:small), class: "img-circle " , width: "35" , height: "35"} #{profile.firstname} #{profile.lastname}<br /><span>#{profile.user.email}</span>"),profile ,style: 'color: #808394'%></li>
+    3: <% end %>
+    4: <li><%= link_to raw( t 'other.more_result'),profiles_path ,style: 'color: #808394'%></li>
+  app/views/profiles/_search_result.html.erb:1:in `_app_views_profiles__search_result_html_erb__1391276594353415027_70342238067320'
+  app/views/profiles/index.js.erb:1:in `_app_views_profiles_index_js_erb___509164311407664852_70342238114060'
+
+
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.9ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (10.0ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=saina&_=1401287046054" for 127.0.0.1 at 2014-05-28 18:54:10 +0430
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"saina", "_"=>"1401287046054"}
+  [1m[36mProfile Load (0.4ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx[0m  Retrying query "SELECT * FROM `profile_core` WHERE MATCH('saina') AND `sphinx_deleted` = 0 LIMIT 0, 5; SHOW META" after error: Can't connect to MySQL server on '127.0.0.1' (61)
+  [1m[32mSphinx[0m  Retrying query "SELECT * FROM `profile_core` WHERE MATCH('saina') AND `sphinx_deleted` = 0 LIMIT 0, 5; SHOW META" after error: Can't connect to MySQL server on '127.0.0.1' (61)
+  [1m[32mSphinx Query (2.6ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('saina') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  Rendered profiles/_search_result.html.erb (7.0ms)
+  Rendered profiles/index.js.erb (10.5ms)
+Completed 500 Internal Server Error in 23ms
+
+ActionView::Template::Error (Can't connect to MySQL server on '127.0.0.1' (61)):
+    1: <% @search_box.each do |profile| %>
+    2:     <li ><%= link_to raw("#{image_tag profile.avatar.url(:small), class: "img-circle " , width: "35" , height: "35"} #{profile.firstname} #{profile.lastname}<br /><span>#{profile.user.email}</span>"),profile ,style: 'color: #808394'%></li>
+    3: <% end %>
+    4: <li><%= link_to raw( t 'other.more_result'),profiles_path ,style: 'color: #808394'%></li>
+  app/views/profiles/_search_result.html.erb:1:in `_app_views_profiles__search_result_html_erb__1391276594353415027_70342238067320'
+  app/views/profiles/index.js.erb:1:in `_app_views_profiles_index_js_erb___509164311407664852_70342238114060'
+
+
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.5ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (11.8ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=sain&_=1401287046055" for 127.0.0.1 at 2014-05-28 18:54:11 +0430
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"sain", "_"=>"1401287046055"}
+  [1m[36mProfile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx[0m  Retrying query "SELECT * FROM `profile_core` WHERE MATCH('sain') AND `sphinx_deleted` = 0 LIMIT 0, 5; SHOW META" after error: Can't connect to MySQL server on '127.0.0.1' (61)
+  [1m[32mSphinx[0m  Retrying query "SELECT * FROM `profile_core` WHERE MATCH('sain') AND `sphinx_deleted` = 0 LIMIT 0, 5; SHOW META" after error: Can't connect to MySQL server on '127.0.0.1' (61)
+  [1m[32mSphinx Query (3.1ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('sain') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  Rendered profiles/_search_result.html.erb (8.2ms)
+  Rendered profiles/index.js.erb (11.3ms)
+Completed 500 Internal Server Error in 21ms
+
+ActionView::Template::Error (Can't connect to MySQL server on '127.0.0.1' (61)):
+    1: <% @search_box.each do |profile| %>
+    2:     <li ><%= link_to raw("#{image_tag profile.avatar.url(:small), class: "img-circle " , width: "35" , height: "35"} #{profile.firstname} #{profile.lastname}<br /><span>#{profile.user.email}</span>"),profile ,style: 'color: #808394'%></li>
+    3: <% end %>
+    4: <li><%= link_to raw( t 'other.more_result'),profiles_path ,style: 'color: #808394'%></li>
+  app/views/profiles/_search_result.html.erb:1:in `_app_views_profiles__search_result_html_erb__1391276594353415027_70342238067320'
+  app/views/profiles/index.js.erb:1:in `_app_views_profiles_index_js_erb___509164311407664852_70342238114060'
+
+
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.8ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (9.5ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=sai&_=1401287046056" for 127.0.0.1 at 2014-05-28 18:54:12 +0430
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"sai", "_"=>"1401287046056"}
+  [1m[36mProfile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx[0m  Retrying query "SELECT * FROM `profile_core` WHERE MATCH('sai') AND `sphinx_deleted` = 0 LIMIT 0, 5; SHOW META" after error: Can't connect to MySQL server on '127.0.0.1' (61)
+  [1m[32mSphinx[0m  Retrying query "SELECT * FROM `profile_core` WHERE MATCH('sai') AND `sphinx_deleted` = 0 LIMIT 0, 5; SHOW META" after error: Can't connect to MySQL server on '127.0.0.1' (61)
+  [1m[32mSphinx Query (2.8ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('sai') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  Rendered profiles/_search_result.html.erb (7.1ms)
+  Rendered profiles/index.js.erb (10.7ms)
+Completed 500 Internal Server Error in 23ms
+
+ActionView::Template::Error (Can't connect to MySQL server on '127.0.0.1' (61)):
+    1: <% @search_box.each do |profile| %>
+    2:     <li ><%= link_to raw("#{image_tag profile.avatar.url(:small), class: "img-circle " , width: "35" , height: "35"} #{profile.firstname} #{profile.lastname}<br /><span>#{profile.user.email}</span>"),profile ,style: 'color: #808394'%></li>
+    3: <% end %>
+    4: <li><%= link_to raw( t 'other.more_result'),profiles_path ,style: 'color: #808394'%></li>
+  app/views/profiles/_search_result.html.erb:1:in `_app_views_profiles__search_result_html_erb__1391276594353415027_70342238067320'
+  app/views/profiles/index.js.erb:1:in `_app_views_profiles_index_js_erb___509164311407664852_70342238114060'
+
+
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.8ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (9.6ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=sa&_=1401287046057" for 127.0.0.1 at 2014-05-28 18:54:12 +0430
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"sa", "_"=>"1401287046057"}
+  [1m[36mProfile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx[0m  Retrying query "SELECT * FROM `profile_core` WHERE MATCH('sa') AND `sphinx_deleted` = 0 LIMIT 0, 5; SHOW META" after error: Can't connect to MySQL server on '127.0.0.1' (61)
+  [1m[32mSphinx[0m  Retrying query "SELECT * FROM `profile_core` WHERE MATCH('sa') AND `sphinx_deleted` = 0 LIMIT 0, 5; SHOW META" after error: Can't connect to MySQL server on '127.0.0.1' (61)
+  [1m[32mSphinx Query (2.7ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('sa') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  Rendered profiles/_search_result.html.erb (7.0ms)
+  Rendered profiles/index.js.erb (10.6ms)
+Completed 500 Internal Server Error in 22ms
+
+ActionView::Template::Error (Can't connect to MySQL server on '127.0.0.1' (61)):
+    1: <% @search_box.each do |profile| %>
+    2:     <li ><%= link_to raw("#{image_tag profile.avatar.url(:small), class: "img-circle " , width: "35" , height: "35"} #{profile.firstname} #{profile.lastname}<br /><span>#{profile.user.email}</span>"),profile ,style: 'color: #808394'%></li>
+    3: <% end %>
+    4: <li><%= link_to raw( t 'other.more_result'),profiles_path ,style: 'color: #808394'%></li>
+  app/views/profiles/_search_result.html.erb:1:in `_app_views_profiles__search_result_html_erb__1391276594353415027_70342238067320'
+  app/views/profiles/index.js.erb:1:in `_app_views_profiles_index_js_erb___509164311407664852_70342238114060'
+
+
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.9ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (10.3ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=s&_=1401287046058" for 127.0.0.1 at 2014-05-28 18:54:12 +0430
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"s", "_"=>"1401287046058"}
+  [1m[36mProfile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx[0m  Retrying query "SELECT * FROM `profile_core` WHERE MATCH('s') AND `sphinx_deleted` = 0 LIMIT 0, 5; SHOW META" after error: Can't connect to MySQL server on '127.0.0.1' (61)
+  [1m[32mSphinx[0m  Retrying query "SELECT * FROM `profile_core` WHERE MATCH('s') AND `sphinx_deleted` = 0 LIMIT 0, 5; SHOW META" after error: Can't connect to MySQL server on '127.0.0.1' (61)
+  [1m[32mSphinx Query (2.5ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('s') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  Rendered profiles/_search_result.html.erb (6.6ms)
+  Rendered profiles/index.js.erb (10.2ms)
+Completed 500 Internal Server Error in 22ms
+
+ActionView::Template::Error (Can't connect to MySQL server on '127.0.0.1' (61)):
+    1: <% @search_box.each do |profile| %>
+    2:     <li ><%= link_to raw("#{image_tag profile.avatar.url(:small), class: "img-circle " , width: "35" , height: "35"} #{profile.firstname} #{profile.lastname}<br /><span>#{profile.user.email}</span>"),profile ,style: 'color: #808394'%></li>
+    3: <% end %>
+    4: <li><%= link_to raw( t 'other.more_result'),profiles_path ,style: 'color: #808394'%></li>
+  app/views/profiles/_search_result.html.erb:1:in `_app_views_profiles__search_result_html_erb__1391276594353415027_70342238067320'
+  app/views/profiles/index.js.erb:1:in `_app_views_profiles_index_js_erb___509164311407664852_70342238114060'
+
+
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.2ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (12.4ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=&_=1401287046059" for 127.0.0.1 at 2014-05-28 18:54:12 +0430
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"", "_"=>"1401287046059"}
+  [1m[36mProfile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[35mProfile Load (0.3ms)[0m  SELECT "profiles".* FROM "profiles" WHERE (1 = 0)
+  Rendered profiles/_search_result.html.erb (1.0ms)
+  [1m[32mSphinx[0m  Retrying query "SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10; SHOW META" after error: Can't connect to MySQL server on '127.0.0.1' (61)
+  [1m[32mSphinx[0m  Retrying query "SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10; SHOW META" after error: Can't connect to MySQL server on '127.0.0.1' (61)
+  [1m[32mSphinx Query (5.3ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  Rendered profiles/_profiles.html.erb (12.0ms)
+  Rendered profiles/index.js.erb (21.7ms)
+Completed 500 Internal Server Error in 33ms
+
+ActionView::Template::Error (Can't connect to MySQL server on '127.0.0.1' (61)):
+    17:       </thead>
+    18: 
+    19:       <tbody>
+    20:       <% @profiles.each do |profile| %>
+    21:           <tr>
+    22:             <td><%= image_tag profile.avatar.url(:thumb) ,{id: profile.id , class: "img-circle img-responsive img-thumbnail" , width: "100" , height: "100" , alt: "Profile"}%>
+    23:             <td><%= profile.user.email %></td>
+  app/views/profiles/_profiles.html.erb:20:in `_app_views_profiles__profiles_html_erb__4245040829559709913_70342186462600'
+  app/views/profiles/index.js.erb:2:in `_app_views_profiles_index_js_erb___509164311407664852_70342238114060'
+
+
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.9ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (10.2ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=s&_=1401287046060" for 127.0.0.1 at 2014-05-28 18:54:37 +0430
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"s", "_"=>"1401287046060"}
+  [1m[35mProfile Load (0.3ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)[0m  [["to_id", 1]]
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)
+  [1m[32mSphinx Query (11.5ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('s') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (13.3ms)
+  [1m[32mSphinx Query (0.9ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[36mProfile Load (0.4ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (7.5ms)
+  Rendered profiles/index.js.erb (29.7ms)
+Completed 200 OK in 44ms (Views: 39.8ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/assets/icon_search.png" for 127.0.0.1 at 2014-05-28 18:54:37 +0430
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=sa&_=1401287046061" for 127.0.0.1 at 2014-05-28 18:54:38 +0430
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"sa", "_"=>"1401287046061"}
+  [1m[35mProfile Load (0.3ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)[0m  [["to_id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)
+  [1m[32mSphinx Query (1.0ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('sa') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.6ms)
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[36mProfile Load (0.5ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (6.4ms)
+  Rendered profiles/index.js.erb (15.6ms)
+Completed 200 OK in 27ms (Views: 21.4ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=sain&_=1401287046062" for 127.0.0.1 at 2014-05-28 18:54:38 +0430
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"sain", "_"=>"1401287046062"}
+  [1m[35mProfile Load (0.4ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)[0m  [["to_id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('sain') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.4ms)
+  [1m[32mSphinx Query (0.8ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[36mProfile Load (0.4ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (8.3ms)
+  Rendered profiles/index.js.erb (16.9ms)
+Completed 200 OK in 27ms (Views: 22.9ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=sain&_=1401287046063" for 127.0.0.1 at 2014-05-28 18:54:38 +0430
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"sain", "_"=>"1401287046063"}
+  [1m[35mProfile Load (0.3ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)[0m  [["to_id", 1]]
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)
+  [1m[32mSphinx Query (0.7ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('sain') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.4ms)
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[36mProfile Load (0.4ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (5.7ms)
+  Rendered profiles/index.js.erb (15.1ms)
+Completed 200 OK in 27ms (Views: 22.7ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=saina&_=1401287046064" for 127.0.0.1 at 2014-05-28 18:54:38 +0430
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"saina", "_"=>"1401287046064"}
+  [1m[35mProfile Load (0.3ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)[0m  [["to_id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)
+  [1m[32mSphinx Query (0.7ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('saina') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.6ms)
+  [1m[32mSphinx Query (0.7ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[36mProfile Load (0.4ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (6.6ms)
+  Rendered profiles/index.js.erb (16.5ms)
+Completed 200 OK in 27ms (Views: 22.3ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=sain&_=1401287046065" for 127.0.0.1 at 2014-05-28 18:54:39 +0430
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"sain", "_"=>"1401287046065"}
+  [1m[35mProfile Load (0.3ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)[0m  [["to_id", 1]]
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)
+  [1m[32mSphinx Query (0.7ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('sain') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.8ms)
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[36mProfile Load (0.5ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (7.0ms)
+  Rendered profiles/index.js.erb (17.6ms)
+Completed 200 OK in 29ms (Views: 24.4ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=sai&_=1401287046066" for 127.0.0.1 at 2014-05-28 18:54:40 +0430
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"sai", "_"=>"1401287046066"}
+  [1m[35mProfile Load (0.3ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)[0m  [["to_id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)
+  [1m[32mSphinx Query (0.7ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('sai') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.7ms)
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[36mProfile Load (0.4ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (6.4ms)
+  Rendered profiles/index.js.erb (16.6ms)
+Completed 200 OK in 26ms (Views: 22.5ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=sa&_=1401287046067" for 127.0.0.1 at 2014-05-28 18:54:40 +0430
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"sa", "_"=>"1401287046067"}
+  [1m[35mProfile Load (0.3ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)[0m  [["to_id", 1]]
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('sa') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.3ms)
+  [1m[32mSphinx Query (0.7ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[36mProfile Load (0.4ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (6.4ms)
+  Rendered profiles/index.js.erb (15.2ms)
+Completed 200 OK in 27ms (Views: 22.1ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=s&_=1401287046068" for 127.0.0.1 at 2014-05-28 18:54:40 +0430
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"s", "_"=>"1401287046068"}
+  [1m[35mProfile Load (0.4ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)[0m  [["to_id", 1]]
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('s') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.4ms)
+  [1m[32mSphinx Query (0.5ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[36mProfile Load (0.4ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (5.5ms)
+  Rendered profiles/index.js.erb (15.1ms)
+Completed 200 OK in 28ms (Views: 23.0ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=&_=1401287046069" for 127.0.0.1 at 2014-05-28 18:54:40 +0430
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"", "_"=>"1401287046069"}
+  [1m[35mProfile Load (0.3ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)[0m  [["to_id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)
+  [1m[36mProfile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE (1 = 0)[0m
+  Rendered profiles/_search_result.html.erb (1.0ms)
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mProfile Load (0.4ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (5.9ms)
+  Rendered profiles/index.js.erb (13.3ms)
+Completed 200 OK in 24ms (Views: 19.7ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=a&_=1401287046070" for 127.0.0.1 at 2014-05-28 18:54:41 +0430
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"a", "_"=>"1401287046070"}
+  [1m[36mProfile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx Query (0.9ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('a') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mProfile Load (0.5ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_search_result.html.erb (6.0ms)
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mCACHE (0.0ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (5.2ms)
+  Rendered profiles/index.js.erb (18.2ms)
+Completed 200 OK in 28ms (Views: 24.0ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=ami&_=1401287046071" for 127.0.0.1 at 2014-05-28 18:54:41 +0430
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"ami", "_"=>"1401287046071"}
+  [1m[36mProfile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('ami') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.4ms)
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mProfile Load (0.4ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (5.6ms)
+  Rendered profiles/index.js.erb (14.6ms)
+Completed 200 OK in 25ms (Views: 20.7ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=ami&_=1401287046072" for 127.0.0.1 at 2014-05-28 18:54:41 +0430
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"ami", "_"=>"1401287046072"}
+  [1m[36mProfile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx Query (0.8ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('ami') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.5ms)
+  [1m[32mSphinx Query (0.7ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mProfile Load (0.4ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (6.2ms)
+  Rendered profiles/index.js.erb (15.2ms)
+Completed 200 OK in 26ms (Views: 21.4ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=amir&_=1401287046073" for 127.0.0.1 at 2014-05-28 18:54:42 +0430
+  [1m[35mUser Load (0.6ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"amir", "_"=>"1401287046073"}
+  [1m[36mProfile Load (0.4ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('amir') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.3ms)
+  [1m[32mSphinx Query (0.8ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mProfile Load (0.4ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (6.0ms)
+  Rendered profiles/index.js.erb (14.7ms)
+Completed 200 OK in 26ms (Views: 21.1ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=ami&_=1401287046074" for 127.0.0.1 at 2014-05-28 18:54:43 +0430
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"ami", "_"=>"1401287046074"}
+  [1m[36mProfile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx Query (0.7ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('ami') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.5ms)
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mProfile Load (0.4ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (6.1ms)
+  Rendered profiles/index.js.erb (15.2ms)
+Completed 200 OK in 26ms (Views: 22.2ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=am&_=1401287046075" for 127.0.0.1 at 2014-05-28 18:54:43 +0430
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"am", "_"=>"1401287046075"}
+  [1m[36mProfile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('am') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.4ms)
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mProfile Load (0.4ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (5.4ms)
+  Rendered profiles/index.js.erb (14.8ms)
+Completed 200 OK in 27ms (Views: 22.5ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=a&_=1401287046076" for 127.0.0.1 at 2014-05-28 18:54:44 +0430
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"a", "_"=>"1401287046076"}
+  [1m[36mProfile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('a') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mProfile Load (0.4ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_search_result.html.erb (4.7ms)
+  [1m[32mSphinx Query (0.8ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mCACHE (0.0ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (4.3ms)
+  Rendered profiles/index.js.erb (15.6ms)
+Completed 200 OK in 26ms (Views: 22.4ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=ami&_=1401287046077" for 127.0.0.1 at 2014-05-28 18:54:46 +0430
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"ami", "_"=>"1401287046077"}
+  [1m[36mProfile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx Query (0.7ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('ami') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.4ms)
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mProfile Load (0.4ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (5.7ms)
+  Rendered profiles/index.js.erb (15.7ms)
+Completed 200 OK in 27ms (Views: 22.7ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=ami&_=1401287046078" for 127.0.0.1 at 2014-05-28 18:54:47 +0430
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"ami", "_"=>"1401287046078"}
+  [1m[36mProfile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('ami') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.2ms)
+  [1m[32mSphinx Query (0.5ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mProfile Load (0.4ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (5.6ms)
+  Rendered profiles/index.js.erb (15.6ms)
+Completed 200 OK in 27ms (Views: 22.7ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=amir&_=1401287046079" for 127.0.0.1 at 2014-05-28 18:54:47 +0430
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"amir", "_"=>"1401287046079"}
+  [1m[36mProfile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('amir') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.1ms)
+  [1m[32mSphinx Query (0.5ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mProfile Load (0.4ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (4.9ms)
+  Rendered profiles/index.js.erb (13.5ms)
+Completed 200 OK in 24ms (Views: 20.5ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=amirr&_=1401287046080" for 127.0.0.1 at 2014-05-28 18:54:47 +0430
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"amirr", "_"=>"1401287046080"}
+  [1m[36mProfile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('amirr') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.1ms)
+  [1m[32mSphinx Query (0.7ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mProfile Load (0.4ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (5.8ms)
+  Rendered profiles/index.js.erb (14.2ms)
+Completed 200 OK in 24ms (Views: 20.2ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=amirre&_=1401287046081" for 127.0.0.1 at 2014-05-28 18:54:47 +0430
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"amirre", "_"=>"1401287046081"}
+  [1m[36mProfile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx Query (0.8ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('amirre') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.3ms)
+  [1m[32mSphinx Query (0.7ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mProfile Load (0.4ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (5.9ms)
+  Rendered profiles/index.js.erb (14.6ms)
+Completed 200 OK in 25ms (Views: 20.9ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=amirrez&_=1401287046082" for 127.0.0.1 at 2014-05-28 18:54:47 +0430
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"amirrez", "_"=>"1401287046082"}
+  [1m[36mProfile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('amirrez') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.1ms)
+  [1m[32mSphinx Query (0.7ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mProfile Load (0.4ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (5.8ms)
+  Rendered profiles/index.js.erb (14.2ms)
+Completed 200 OK in 24ms (Views: 20.0ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=amirreza&_=1401287046083" for 127.0.0.1 at 2014-05-28 18:54:47 +0430
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"amirreza", "_"=>"1401287046083"}
+  [1m[36mProfile Load (0.2ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('amirreza') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mProfile Load (0.4ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_search_result.html.erb (4.7ms)
+  [1m[32mSphinx Query (0.5ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mCACHE (0.0ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (4.2ms)
+  Rendered profiles/index.js.erb (15.3ms)
+Completed 200 OK in 25ms (Views: 21.7ms | ActiveRecord: 1.3ms)

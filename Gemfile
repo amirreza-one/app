@@ -8,11 +8,13 @@ gem 'rails', '4.0.3'
 
 group :development , :test do
 	gem 'mysql2',          '0.3.12b5', :platform => :ruby
+  gem 'pg'
 	gem 'jdbc-mysql',      '5.1.28',   :platform => :jruby
 end
 group :production do
 	gem 'pg'
 end
+
 gem 'thin'
 
 

@@ -3,23 +3,20 @@
   <component name="DataSourceManagerImpl" format="xml" hash="2462386379">
     <data-source source="LOCAL" name="Rails virtualgym: development" uuid="118a7771-0194-403b-87b7-23f962b96c9a">
       <driver-ref>mysql</driver-ref>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://127.0.0.1/virtual_gym_development</jdbc-url>
-      <user-name>root</user-name>
-      <user-password>dfd8dfc5dfc5dfde</user-password>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:virtual_gym_development</jdbc-url>
       <libraries />
     </data-source>
     <data-source source="LOCAL" name="Rails virtualgym: test" uuid="215dfe6a-cf5c-44fa-bbe8-391b1c9d2e44">
       <driver-ref>mysql</driver-ref>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://127.0.0.1/virtual_gym_test</jdbc-url>
-      <user-name>root</user-name>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:virtual_gym_test</jdbc-url>
       <libraries />
     </data-source>
     <data-source source="LOCAL" name="Rails virtualgym: production" uuid="69ec2d29-14f7-4f46-9395-3692cc2a4fdd">
       <driver-ref>mysql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://127.0.0.1/virtual_gym_production</jdbc-url>
+      <jdbc-url>jdbc:postgresql:virtual_gym_production</jdbc-url>
       <libraries />
     </data-source>
   </component>
