@@ -100,6 +100,7 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    pg (0.17.1)
     polyglot (0.3.4)
     prototype-rails (4.0.0)
       rails (~> 4.0)
@@ -196,6 +197,7 @@ DEPENDENCIES
   less-rails-bootstrap
   mysql2 (= 0.3.12b5)
   paperclip (~> 4.1)
+  pg
   prototype-rails
   rails (= 4.0.3)
   rails_12factor
