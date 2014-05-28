@@ -12,7 +12,8 @@ group :development , :test do
 	gem 'jdbc-mysql',      '5.1.28',   :platform => :jruby
 end
 group :production do
-	gem 'pg'
+  gem 'mysql2',          '0.3.12b5', :platform => :ruby
+  gem 'pg'
 end
 
 gem 'thin'
