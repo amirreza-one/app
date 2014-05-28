@@ -18,9 +18,8 @@
     </data-source>
     <data-source source="LOCAL" name="Rails virtualgym: production" uuid="69ec2d29-14f7-4f46-9395-3692cc2a4fdd">
       <driver-ref>mysql</driver-ref>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://127.0.0.1/virtual_gym_production</jdbc-url>
-      <user-name>root</user-name>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1/virtual_gym_production</jdbc-url>
       <libraries />
     </data-source>
   </component>

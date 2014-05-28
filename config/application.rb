@@ -10,11 +10,11 @@ Bundler.require(:default, Rails.env)
 module VirtualGym
   class Application < Rails::Application
 	config.assets.paths << "#{Rails}/vendor/assets/fonts"
-	config.assets.paths << Rails.root.join("app", "assets", "fonts")
+	config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
   config.to_prepare do
-    Devise::SessionsController.layout "login"
+    Devise::SessionsController.layout 'login'
     Devise::RegistrationsController.layout proc{ |controller| action_name == 'edit' ? 'simple_admin'   : 'signup' }
-    Devise::PasswordsController.layout "login"
+    Devise::PasswordsController.layout 'login'
   end
 
   config.action_view.field_error_proc = Proc.new { |html_tag, instance|
