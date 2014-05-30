@@ -4657,3 +4657,418 @@ Processing by ProfilesController#index as JS
   Rendered profiles/_profiles.html.erb (4.2ms)
   Rendered profiles/index.js.erb (15.3ms)
 Completed 200 OK in 25ms (Views: 21.7ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2014-05-30 12:24:21 +0430
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Devise::RegistrationsController#new as HTML
+  [1m[35mUser Load (3.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://localhost:3000/profiles/1
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 82ms (ActiveRecord: 6.9ms)
+
+
+Started GET "/profiles/1" for 127.0.0.1 at 2014-05-30 12:24:21 +0430
+  [1m[36mUser Load (1.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Processing by ProfilesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mProfile Load (12.3ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (1.6ms)[0m  [1mSELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)[0m  [["to_id", 1]]
+  [1m[35m (1.1ms)[0m  SELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)
+  [1m[36mProfile Load (0.8ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 LIMIT 1[0m  [["id", "1"]]
+  [1m[35mUser Load (1.5ms)[0m  SELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1  [["profile_id", 1]]
+DEPRECATION WARNING: Calling #find(:first) is deprecated. Please call #first directly instead. You have also used finder options. These are also deprecated. Please build a scope instead of using finder options. (called from show at /Users/MacbookPro/Sites/Ruby On Rails/virtualgym/app/controllers/profiles_controller.rb:27)
+  [1m[36mRequestFriendship Load (0.9ms)[0m  [1mSELECT "request_friendships".* FROM "request_friendships" WHERE "request_friendships"."user_id" = 1 AND "request_friendships"."request_to_id" = 1 ORDER BY "request_friendships"."id" ASC LIMIT 1[0m
+DEPRECATION WARNING: Calling #find(:first) is deprecated. Please call #first directly instead. You have also used finder options. These are also deprecated. Please build a scope instead of using finder options. (called from show at /Users/MacbookPro/Sites/Ruby On Rails/virtualgym/app/controllers/profiles_controller.rb:30)
+  [1m[35mFriendship Load (2.2ms)[0m  SELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 1 AND "friendships"."friend_id" = 1 ORDER BY "friendships"."id" ASC LIMIT 1
+  [1m[36m (2.3ms)[0m  [1mSELECT SUM("workouts"."total_min") AS sum_id FROM "workouts" WHERE "workouts"."user_id" = 1[0m
+  [1m[35m (0.9ms)[0m  SELECT SUM("workouts"."total_cal") AS sum_id FROM "workouts" WHERE "workouts"."user_id" = 1
+  [1m[36m (0.7ms)[0m  [1mSELECT COUNT(*) FROM "photo_events" WHERE "photo_events"."profile_id" = $1[0m  [["profile_id", 1]]
+  Rendered profiles/_information_mobile.html.erb (4.9ms)
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(*) FROM "photo_events" WHERE "photo_events"."profile_id" = $1  [["profile_id", 1]]
+  Rendered profiles/show.html.erb within layouts/admin (40.6ms)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM "photo_events" WHERE "photo_events"."profile_id" = $1[0m  [["profile_id", 1]]
+  Rendered layouts/_friend_modal.html.erb (0.7ms)
+  Rendered challenges/_challenge_modal.html.erb (0.6ms)
+Completed 200 OK in 624ms (Views: 421.5ms | ActiveRecord: 44.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:21 +0430
+
+
+Started GET "/assets/SideNavigation/component.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/twitter/bootstrap.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/search_box.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/All/custom-profile-master.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/font-awesome.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/All/amount_types.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/All/equipment.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/All/exercises.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/All/foods.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/All/jquery-ui-1.10.4.custom.min.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/All/plans.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/All/profiles.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/All/scaffolds.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/All/tests.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/All/test.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/All/timer.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/All/users.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/All/workouts.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/All/workout_plan.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/pnotify.custom.min.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/jquery-ui-1.10.4.custom.min.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/twitter/bootstrap/transition.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/twitter/bootstrap/alert.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/twitter/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/twitter/bootstrap/button.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/twitter/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/twitter/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/twitter/bootstrap/modal.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/twitter/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/twitter/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/twitter/bootstrap/popover.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/twitter/bootstrap/tab.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/twitter/bootstrap/affix.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/aladin.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/hammer.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/pnotify.custom.min.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/partial/search_layout.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/SideNavigation/modernizr.custom.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/javascripts/data-turbolinks-track.js" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+ActionController::RoutingError (No route matches [GET] "/javascripts/data-turbolinks-track.js"):
+  actionpack (4.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.3) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.3) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.3) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.3) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.0.3) lib/rails/engine.rb:511:in `call'
+  railties (4.0.3) lib/rails/application.rb:97:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  thin (1.6.2) lib/thin/connection.rb:86:in `block in pre_process'
+  thin (1.6.2) lib/thin/connection.rb:84:in `catch'
+  thin (1.6.2) lib/thin/connection.rb:84:in `pre_process'
+  thin (1.6.2) lib/thin/connection.rb:53:in `process'
+  thin (1.6.2) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run'
+  thin (1.6.2) lib/thin/backends/base.rb:73:in `start'
+  thin (1.6.2) lib/thin/server.rb:162:in `start'
+  rack (1.5.2) lib/rack/handler/thin.rb:16:in `run'
+  rack (1.5.2) lib/rack/server.rb:264:in `start'
+  railties (4.0.3) lib/rails/commands/server.rb:84:in `start'
+  railties (4.0.3) lib/rails/commands.rb:76:in `block in <top (required)>'
+  railties (4.0.3) lib/rails/commands.rb:71:in `tap'
+  railties (4.0.3) lib/rails/commands.rb:71:in `<top (required)>'
+  bin/rails:4:in `require'
+  bin/rails:4:in `<main>'
+
+
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/routes/_route.html.erb (12.1ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.7ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (153.1ms)
+
+
+Started GET "/assets/Video%20Gallery/html5gallery.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/Flipclock/base.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/Flipclock/hourlycounter.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/Flipclock/flipclock.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/Flipclock/minutecounter.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/Flipclock/flipclock.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/SideNavigation/icons.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/SideNavigation/normalize.css?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/SideNavigation/classie.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/SideNavigation/sidebarEffects.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:22 +0430
+
+
+Started GET "/assets/All/background.jpg" for 127.0.0.1 at 2014-05-30 12:24:23 +0430
+
+
+Started GET "/assets/search.png" for 127.0.0.1 at 2014-05-30 12:24:23 +0430
+
+
+Started GET "/assets/fontawesome-webfont.woff?v=4.0.2" for 127.0.0.1 at 2014-05-30 12:24:24 +0430
+
+
+Started GET "/assets/twitter/bootstrap/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2014-05-30 12:24:24 +0430
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=sa&_=1401436462303" for 127.0.0.1 at 2014-05-30 12:24:26 +0430
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"sa", "_"=>"1401436462303"}
+  [1m[36mProfile Load (0.4ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx Query (29.0ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('sa') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (35.5ms)
+  [1m[32mSphinx Query (1.0ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mProfile Load (0.4ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (17.4ms)
+  Rendered profiles/index.js.erb (63.2ms)
+Completed 200 OK in 82ms (Views: 77.4ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=sai&_=1401436462304" for 127.0.0.1 at 2014-05-30 12:24:26 +0430
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"sai", "_"=>"1401436462304"}
+  [1m[36mProfile Load (0.4ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.9ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx Query (0.8ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('sai') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (3.1ms)
+  [1m[32mSphinx Query (0.8ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mProfile Load (0.4ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (6.8ms)
+  Rendered profiles/index.js.erb (17.8ms)
+Completed 200 OK in 30ms (Views: 24.9ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/assets/icon_search.png" for 127.0.0.1 at 2014-05-30 12:24:26 +0430
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=sain&_=1401436462305" for 127.0.0.1 at 2014-05-30 12:24:26 +0430
+  [1m[35mUser Load (0.7ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"sain", "_"=>"1401436462305"}
+  [1m[36mProfile Load (0.4ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx Query (0.7ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('sain') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.5ms)
+  [1m[32mSphinx Query (0.5ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mProfile Load (0.4ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (6.5ms)
+  Rendered profiles/index.js.erb (15.7ms)
+Completed 200 OK in 28ms (Views: 22.8ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=saina&_=1401436462306" for 127.0.0.1 at 2014-05-30 12:24:26 +0430
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"saina", "_"=>"1401436462306"}
+  [1m[36mProfile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx Query (0.7ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('saina') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.7ms)
+  [1m[32mSphinx Query (0.7ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mProfile Load (0.5ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (7.5ms)
+  Rendered profiles/index.js.erb (18.0ms)
+Completed 200 OK in 28ms (Views: 23.8ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/profiles?utf8=%E2%9C%93&search_layout=saina&_=1401436462307" for 127.0.0.1 at 2014-05-30 12:24:27 +0430
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as JS
+  Parameters: {"utf8"=>"✓", "search_layout"=>"saina", "_"=>"1401436462307"}
+  [1m[36mProfile Load (0.5ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx Query (0.8ms)[0m  SELECT * FROM `profile_core` WHERE MATCH('saina') AND `sphinx_deleted` = 0 LIMIT 0, 5
+  [1m[32mSphinx[0m  Found 0 results
+  Rendered profiles/_search_result.html.erb (2.7ms)
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mProfile Load (0.4ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (7.1ms)
+  Rendered profiles/index.js.erb (16.8ms)
+Completed 200 OK in 29ms (Views: 24.0ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/profiles" for 127.0.0.1 at 2014-05-30 12:24:27 +0430
+  [1m[35mUser Load (0.6ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Processing by ProfilesController#index as HTML
+  [1m[36mProfile Load (0.9ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."id" = $1 ORDER BY "profiles"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM "messages" WHERE "messages"."to_id" = $1 AND (status = 0)  [["to_id", 1]]
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM "request_friendships" WHERE (request_to_id = 1)[0m
+  [1m[32mSphinx Query (0.6ms)[0m  SELECT * FROM `profile_core` WHERE `sphinx_deleted` = 0 LIMIT 0, 10
+  [1m[32mSphinx[0m  Found 1 results
+  [1m[35mProfile Load (0.4ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."id" IN (1)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."profile_id" = $1 ORDER BY "users"."id" ASC LIMIT 1[0m  [["profile_id", 1]]
+  Rendered profiles/_profiles.html.erb (6.6ms)
+  Rendered profiles/index.html.erb within layouts/admin (15.9ms)
+  Rendered layouts/_friend_modal.html.erb (0.2ms)
+  Rendered challenges/_challenge_modal.html.erb (0.1ms)
+Completed 200 OK in 74ms (Views: 66.2ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/javascripts/data-turbolinks-track.js" for 127.0.0.1 at 2014-05-30 12:24:28 +0430
+
+ActionController::RoutingError (No route matches [GET] "/javascripts/data-turbolinks-track.js"):
+  actionpack (4.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.3) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.3) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.3) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.3) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.3) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.3) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.0.3) lib/rails/engine.rb:511:in `call'
+  railties (4.0.3) lib/rails/application.rb:97:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  thin (1.6.2) lib/thin/connection.rb:86:in `block in pre_process'
+  thin (1.6.2) lib/thin/connection.rb:84:in `catch'
+  thin (1.6.2) lib/thin/connection.rb:84:in `pre_process'
+  thin (1.6.2) lib/thin/connection.rb:53:in `process'
+  thin (1.6.2) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run'
+  thin (1.6.2) lib/thin/backends/base.rb:73:in `start'
+  thin (1.6.2) lib/thin/server.rb:162:in `start'
+  rack (1.5.2) lib/rack/handler/thin.rb:16:in `run'
+  rack (1.5.2) lib/rack/server.rb:264:in `start'
+  railties (4.0.3) lib/rails/commands/server.rb:84:in `start'
+  railties (4.0.3) lib/rails/commands.rb:76:in `block in <top (required)>'
+  railties (4.0.3) lib/rails/commands.rb:71:in `tap'
+  railties (4.0.3) lib/rails/commands.rb:71:in `<top (required)>'
+  bin/rails:4:in `require'
+  bin/rails:4:in `<main>'
+
+
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.2ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/routes/_route.html.erb (11.6ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.2ms)
+  Rendered /Users/MacbookPro/.rvm/gems/ruby-2.1.0/gems/actionpack-4.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (141.4ms)
+
+
+Started GET "/assets/partial/pagination.js?body=1" for 127.0.0.1 at 2014-05-30 12:24:28 +0430
